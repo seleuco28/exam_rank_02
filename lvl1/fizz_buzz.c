@@ -37,45 +37,50 @@ fizz
 buzz
 $>*/
 
-#include <stdio.h>
 #include <unistd.h>
+#include <stdio.h>
 
 void ft_putnbr(int i)
 {
-	int iauxiliar;
-	char numero;
+    int iauxiliar;
+    char numero;
 
-	iauxiliar = i;
-	if (i > 9)
-	{
-		iauxiliar = i % 10;
-		i = i / 10;
-		ft_putnbr(i);
+    iauxiliar = i;
+    if (i > 9) //esto puede ser un while o un if porque es recursivo
+    {
+        iauxiliar = i % 10;
+        i = i / 10;
+        ft_putnbr(i);
+    }
 
-	}
-	numero = iauxiliar + 48;
-	write(1, &numero, 1);
+    numero = iauxiliar + 48;
+
+    write(1, &numero, 1);
 }
+/*
+int main()
+{
+    int i = 432;
+    ft_putnbr(i);
+    return 0;
+}*/
 
 
 int main(void)
 {
-    int i = 0;
+    int i = 1;
+
     while (i <= 100)
     {
         if ((i % 3 == 0) && (i % 5 == 0))
-            write(1, "fizzbuzz", 8); 
+            write(1, "fizzbuzz", 8);
         else if (i % 3 == 0)
-        {
             write(1, "fizz", 4);
-        }
         else if (i % 5 == 0)
-        {
             write(1, "buzz", 4);
-        }
         else
             ft_putnbr(i);
-
+            //write(1, "hola" , 4);
         write(1, "\n", 1);
         i++;
     }
