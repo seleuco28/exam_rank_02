@@ -29,6 +29,41 @@ $
 
 #include <unistd.h>
 
+//a mi manera y funciona
+void ft_putstr(char *str)
+{
+	int i = 0;
+
+	while (str[i])
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+}
+
+void wdmatch(char *str1, char *str2)
+{
+	int i = 0;
+	int j = 0;
+
+	while (str2[j])
+	{
+		if (str1[i] == str2[j])
+			i++;
+		j++;
+	}
+	if (!str1[i]) //importante esto!!!
+		ft_putstr(str1);
+}
+
+int main(int ac, char **av)
+{
+	if (ac == 3)
+		wdmatch(av[1], av[2]);
+	write(1, "\n", 1);
+	return (0);
+}
+/*
 void ft_putstr(char const *str)
 {
     int i;
@@ -64,7 +99,7 @@ int main(int ac, char **av)
         wdmatch(av[1], av[2]);
     write(1, "\n", 1);
     return (0);
-}
+}*/
 
 
 // EN EL MAIN TODO, PREFIERO HACERLO CON UNA FUNCION SEPARADA

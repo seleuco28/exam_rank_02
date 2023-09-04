@@ -29,6 +29,41 @@ $>*/
 #include <stdlib.h>
 #include <string.h>
 
+//HECHO POR MI FUNCIONANDO
+int ft_strlen(char *str)
+{
+	int i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+void last_word(char *str)
+{
+	int len = ft_strlen(str) - 1;
+
+
+	while (str[len] == ' ')
+		len--;
+	while (str[len] != ' ')
+		len--;
+	len++;
+	while (str[len] != ' ' && str[len]) // IMPORTANTISIMO ESTET "Y QUE EXISTA" llevo toda la mañañana peleandome con eso
+	{
+		write(1, &str[len], 1);
+		len++;
+	}
+}
+
+int main(int ac, char **av)
+{
+	if (ac == 2)
+		last_word(av[1]);
+	write(1, "\n", 1);
+	return (0);
+}
+
+/*
 // ATENCION, HECHO POR MI Y FUNCIONA, PERO HAY QUE TENER EN CUENTA MUCHO LOS LENS!!
 
 void ft_last_word(char *str)
@@ -58,7 +93,7 @@ int main(int ac, char **av)
 	write(1, "\n", 1);
 	return (0);
 }
-
+*/
 
 
 /*

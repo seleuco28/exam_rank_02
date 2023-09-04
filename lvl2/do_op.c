@@ -34,7 +34,7 @@ int main (int ac, char **av)
 {
     if (ac == 4)
     {
-        if (av[2][0] == '+')
+        if (av[2][0] == '+') //IMPORTATNE fallo aqui necesito el char, no todo el argumento!!!!
             printf("%d", (atoi(av[1]) + atoi(av[3])));
         else if (av[2][0] == '-')
             printf("%d", (atoi(av[1]) - atoi(av[3])));
@@ -45,6 +45,6 @@ int main (int ac, char **av)
         else if (av[2][0] == '%')
             printf("%d", (atoi(av[1]) % atoi(av[3]))); 
     }
-    printf("\n");
+    printf("\n"); //aqui tengo que poner printf, porque si pongo write me escribe el "\n" antes
     return 0;
 }

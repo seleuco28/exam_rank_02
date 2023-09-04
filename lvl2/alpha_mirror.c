@@ -27,7 +27,36 @@ $
 $>
 */
 #include <unistd.h>
+//mi alpha_mirror: FUNCIONANDO
+void alpha_mirror(char *str)
+{
+	int i = 0;
 
+	while (str[i])
+	{
+		if (str[i] >= 'A' && str[i] <= 'M')
+			str[i] = 'Z' - (str[i] - 'A');
+		else if (str[i] >= 'a' && str[i] <= 'm')
+			str[i] = 'z' - (str[i] - 'a');
+		else if (str[i] >= 'N' && str[i] <= 'Z')
+			str[i] = 'A' + ('Z' - str[i]);
+		else if (str[i] >= 'n' && str[i] <= 'z')
+			str[i] = 'a' + ('z' - str[i]);
+		write(1, &str[i], 1);
+		i++;
+	}
+}
+
+int main(int ac, char **av)
+{
+
+	if (ac == 2)
+		alpha_mirror(av[1]);
+	write(1, "\n", 1);
+	return 0;
+}
+
+/*
 void small_mirror (char c)
 {
     if (c <= 'm') //da igual que ponga el igual o no.
@@ -68,4 +97,4 @@ int main (int ac, char **av)
     }
     write(1, "\n", 1);
     return (0);
-}
+}*/
