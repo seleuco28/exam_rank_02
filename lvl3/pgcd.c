@@ -31,14 +31,14 @@ $*/
 
 int atoi_simple(char *s) //esto es una especie de atoi simplificado
 {
-	int sum = 0;
+	int resultado = 0; //hay que inicializarlo a 0 sino te da fallo
 
 	while (*s)
 	{
-		sum = sum * 10 + *s - '0';
+		resultado = resultado * 10 + *s - '0';
 		s++;
 	}
-	return (sum);
+	return (resultado);
 }
 
 void ft_putnbr(int i)
@@ -62,14 +62,14 @@ void pgcd(char *s1, char *s2) // ATENCION, ESTOS DOS ARGUMENTOS NO PUDEN SER INT
 {
 	int i = atoi_simple(s1);
 	int j = atoi_simple(s2);
-	int k = 1;
-	int gcd = 1; //greatest common denominator
+	int aux = 1; //
+	int gcd = 1; //greatest common denominator, la variable que imprimiremos
 
-	while (k <= j || k <= i)
+	while (aux <= j || aux <= i)
 	{
-		if (j % k == 0  && i % k == 0)
-			gcd = k;
-		k++;
+		if (j % aux == 0  && i % aux == 0)
+			gcd = aux;
+		aux++;
 	}
 	
 	ft_putnbr(gcd);

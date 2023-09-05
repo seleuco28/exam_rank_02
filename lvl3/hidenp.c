@@ -53,7 +53,7 @@ int hidenp(char *s1, char *s2)
 
 int main(int ac, char **av)
 {
-	char c;
+	char c; //mucho cuidado porque hay que escribirlo asi!!! si haces un write se vuelve loco
 	if (ac == 3)
 	{
 		c = hidenp(av[1], av[2]) + '0'; // + 48 para pasarlo de int a char
