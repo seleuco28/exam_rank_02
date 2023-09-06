@@ -29,7 +29,44 @@ $
 $>*/
 
 #include <unistd.h>
+//a mi manera y funcionando
+void rev_wstr(char *str)
+{
+    int i = 0;
+    int start;
+    int end;
+    while (str[i])
+        i++;
+    while (i >= 0) //aqui no se puede poner while (str[i]) porque ya no existe claro!!
+    {
+        while (str[i] == ' ' || str[i] == '\t' || str[i] == '\0')
+            i--;
+        end = i;
+        //ATENCION!!!en esta linea de abajo he fallado mucho y por eso no me daba!!
+        while (str[i] && str[i] != ' ' && str[i] != '\t') //mientras palabra
+            i--;
+        start = i + 1; //importante este +1 para estar dentro de la 1ra letra
+        int flag;
+        flag = start;
+        while (start <= end)
+        {
+            write(1, &str[start], 1);
+            start++;
+        }
+        if (flag != 0) //si flag no existe porque era igual a start y se ha acabado
+            write(1, " ", 1);
+    }       
+}
 
+int main(int ac, char **av)
+{
+    if (ac == 2)
+        rev_wstr(av[1]);
+    write(1, "\n", 1);
+    return (0);
+}
+
+/*
 int main(int argc, char **argv)
 {
 	int start;
@@ -62,4 +99,4 @@ int main(int argc, char **argv)
 		}
 	}
 	write(1, "\n", 1);
-}
+}*/

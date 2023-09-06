@@ -1,80 +1,68 @@
-/*Assignment name  : pgcd
-Expected files   : pgcd.c
-Allowed functions: printf, atoi, malloc, free
+/*Assignment name  : rev_wstr
+Expected files   : rev_wstr.c
+Allowed functions: write, malloc, free
 --------------------------------------------------------------------------------
 
-Write a program that takes two strings representing two strictly positive
-integers that fit in an int.
+Write a program that takes a string as a parameter, and prints its words in 
+reverse order.
 
-Display their highest common denominator followed by a newline (It's always a
-strictly positive integer).
+A "word" is a part of the string bounded by spaces and/or tabs, or the 
+begin/end of the string.
 
-If the number of parameters is not 2, display a newline.
+If the number of parameters is different from 1, the program will display 
+'\n'.
+
+In the parameters that are going to be tested, there won't be any "additional" 
+spaces (meaning that there won't be additionnal spaces at the beginning or at 
+the end of the string, and words will always be separated by exactly one space).
 
 Examples:
 
-$> ./pgcd 42 10 | cat -e
-2$
-$> ./pgcd 42 12 | cat -e
-6$
-$> ./pgcd 14 77 | cat -e
-7$
-$> ./pgcd 17 3 | cat -e 
-1$
-$> ./pgcd | cat -e
-$*/
+$> ./rev_wstr "le temps du mepris precede celui de l'indifference" | cat -e
+l'indifference de celui precede mepris du temps le$
+$> ./rev_wstr "abcdefghijklm"
+abcdefghijklm
+$> ./rev_wstr "il contempla le mont" | cat -e
+mont le contempla il$
+$> ./rev_wstr | cat -e
+$
+$>*/
 
-#include <stdio.h>
 #include <unistd.h>
 
-int atoi_simple(char *str)
+
+void rev_wstr(char *str)
 {
-    int resultado = 0;
-
-    while (*str)
+    int i = 0;
+    int start;
+    int end;
+    while (str[i])
+        i++;
+    while (i >= 0) //aqui no se puede poner while (str[i]) porque ya no existe claro!!
     {
-        resultado = resultado * 10 + *str - '0';
-        str++;
-    }
-    return (resultado);
-}
-
-void ft_putnbr(int i)
-{
-    int iauxiliar;
-    char numero;
-    iauxiliar = i;
-    if (i > 9)
-    {
-        iauxiliar = i % 10;
-        i = i / 10;
-        ft_putnbr(i);
-    }
-    numero = iauxiliar + '0';
-    write(1, &numero, 1);
-}
-
-void pgcd(char *s1, char *s2)
-{
-    int i = atoi_simple(s1);
-    int j = atoi_simple(s2);
-    int gdc;
-    int aux = 1;
-
-    while ((j > aux) && (i > aux))
-    {
-        if ((j % aux == 0) && (i % aux == 0))
-            gdc = aux;
-        aux++;
-    }
-    ft_putnbr(gdc);
-
+        while (str[i] == ' ' || str[i] == '\t' || str[i] == '\0')
+            i--;
+        end = i;
+        //ATENCION!!!en esta linea de abajo he fallado mucho y por eso no me daba!!
+        while (str[i] && str[i] != ' ' && str[i] != '\t') //mientras palabra
+            i--;
+        start = i + 1; //importante este +1 para estar dentro de la 1ra letra
+        int flag;
+        flag = start;
+        while (start <= end)
+        {
+            write(1, &str[start], 1);
+            start++;
+        }
+        if (flag != 0) //si flag no existe porque era igual a start y se ha acabado
+            write(1, " ", 1);
+    }       
 }
 
 int main(int ac, char **av)
 {
-    if (ac == 3)
-        pgcd(av[1], av[2]);
+    if (ac == 2)
+        rev_wstr(av[1]);
     write(1, "\n", 1);
-    return 0;
+    return (0);
 }

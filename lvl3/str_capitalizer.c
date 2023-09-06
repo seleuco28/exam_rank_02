@@ -28,6 +28,41 @@ $>*/
 
 #include <unistd.h>
 
+//capitalizer a mi manera, FUNCINANDO
+void str_capitalizer(char *str)
+{
+    int i = 0;
+    if (str[i] >= 'a' && str[i] <= 'z') //si meto esta dentro del while me da error
+        str[i] = str[i] - 32;
+    write(1, &str[i], 1);
+    i++;
+    while (str[i])
+    {
+        if (str[i] >= 'A' && str[i] <= 'Z')
+            str[i] = str[i] + 32;
+        if ((str[i - 1] == ' ') && (str[i] >= 'a' && str[i] <= 'z'))//si la posicion x la anterior es espacio y entre letras, en mayuscula
+            str[i] = str[i] - 32;
+        write(1, &str[i], 1);
+        i++;
+    }
+}
+
+
+int main(int ac, char **av)
+{
+    int i = 1;
+    if (ac == 1)
+        write(1, "\n", 1);
+    while (i <= (ac - 1))
+    {
+        str_capitalizer(av[i]);
+        write(1, "\n", 1);
+        i++;
+    }
+    return 0;
+}
+
+/*
 void	str_capitalizer(char *str)
 {
 	int i = 0;
@@ -49,7 +84,7 @@ int main(int argc, char *argv[])
 {
 	int i;
 
-	if (argc == 1) //o argc < 2
+	if (argc == 1)
 		write(1, "\n", 1);
 	else
 	{
@@ -58,8 +93,8 @@ int main(int argc, char *argv[])
 		{
 			str_capitalizer(argv[i]);
 			write(1, "\n", 1);
-			i += 1;
+			i++;
 		}
 	}
 	return (0);
-}
+}*/

@@ -36,19 +36,19 @@ int atoi_simple(char *s)
 
 void putnbr_hex(int i)
 {
-	char s[16] = "0123456789abcdef";
+	char base[16] = "0123456789abcdef";
 
 	char c;
-	if (i > 16)
+	if (i >= 16) //ojo aqui que si no pones el igual el num 16 te da mal!!
 	{
-		c = s[i % 16];
+		c = base[i % 16];
 		i = i / 16;
 		putnbr_hex(i);
 		write(1, &c, 1);
 	}
 	else 
 	{
-		c = s[i % 16];
+		c = base[i % 16];
 		write(1, &c, 1);
 	}
 }
@@ -64,5 +64,5 @@ int main(int ac, char **av)
 	if (ac == 2)
 		print_hex(av[1]);
 	write(1, "\n", 1);
-	return(1);
+	return(0);
 }
