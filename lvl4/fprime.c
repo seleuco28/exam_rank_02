@@ -48,7 +48,7 @@ void fprime(int n)
 			printf("%d", i);
 			if (n != i)
 				printf("*");
-			n /= i;
+			n /= i; // n = n/i;
 			i--; // tiras una vez atras porque se puede repetir el numero varias veces
 		}
 		i++;

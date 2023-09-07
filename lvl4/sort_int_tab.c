@@ -16,9 +16,45 @@ Input is always coherent.*/
 
 #include <stdio.h>
 
+//a mi manera, funciona, igual que abajo pero comentado
+void sort_int_tab(int *tab, unsigned int size)
+{
+	int i = 0; //hay que inicializar a 0, obvio
+	int temp;
+
+	while (i < (size - 1)) //y poner un size - 1 para que no pete el while
+	{
+		if (tab[i] > tab[i + 1]) //haces el swap y vuelves a empezar el array
+		{
+			temp = tab[i];
+			tab[i] = tab[i + 1];
+			tab[i + 1] = temp;
+			i = 0;
+		}
+		else
+			i++;
+	}
+}
+
+int main()
+{
+	int i = 0;
+	int array[] = {2, 0, 1, 4};
+	unsigned int size = 4;
+
+	sort_int_tab(array, size);
+
+	while (i < size)
+	{
+		printf("%d\n", array[i]);
+		i++;
+	}
+}
+
+/*
 void	sort_int_tab(int *tab, unsigned int size)
 {
-	unsigned int	i = 0;
+	int	i = 0;
 	int	temp;
 
 	while (i < (size - 1))
@@ -49,4 +85,4 @@ int		main(void)
 		i++;
 	}
 	return 0;
-}
+}*/

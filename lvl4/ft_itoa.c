@@ -24,19 +24,18 @@ int get_count(int n)
         n = n / 10;
         i++;
     }
-    //printf("%d", i);
     return (i);
 }
 /*
 int main()
 {
-    get_count(4884);
+    printf("%d", get_count(4884));
     return (0);
 }*/
 
 char *ft_itoa(int n)
 {
-    int count = get_count(n);
+    int count = get_count(n); //get_count para ver cuantos nums hay que mallokear
     char *str;
     str = (char *)malloc(sizeof(char) * count + 1);
     str[count] = '\0';
@@ -44,10 +43,9 @@ char *ft_itoa(int n)
         str[0] = '\0';
     while (n)
     {
-        str[--count] = n % 10 + '0';
+        str[--count] = n % 10 + '0'; // --count al principio para que no te encuentres con el /0
         n = n / 10;
     }
-    //printf("%s\n", str);
     return (str);
 }
 

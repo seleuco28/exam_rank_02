@@ -1,68 +1,84 @@
-/*Assignment name  : rev_wstr
-Expected files   : rev_wstr.c
-Allowed functions: write, malloc, free
+/*Assignment name  : ft_list_size
+Expected files   : ft_list_size.c, ft_list.h
+Allowed functions: 
 --------------------------------------------------------------------------------
 
-Write a program that takes a string as a parameter, and prints its words in 
-reverse order.
+Write a function that returns the number of elements in the linked list that's
+passed to it.
 
-A "word" is a part of the string bounded by spaces and/or tabs, or the 
-begin/end of the string.
+It must be declared as follows:
 
-If the number of parameters is different from 1, the program will display 
-'\n'.
+int	ft_list_size(t_list *begin_list);
 
-In the parameters that are going to be tested, there won't be any "additional" 
-spaces (meaning that there won't be additionnal spaces at the beginning or at 
-the end of the string, and words will always be separated by exactly one space).
+You must use the following structure, and turn it in as a file called
+ft_list.h:
 
-Examples:
+typedef struct    s_list
+{
+    struct s_list *next;
+    void          *data;
+}                 t_list;*/
 
-$> ./rev_wstr "le temps du mepris precede celui de l'indifference" | cat -e
-l'indifference de celui precede mepris du temps le$
-$> ./rev_wstr "abcdefghijklm"
-abcdefghijklm
-$> ./rev_wstr "il contempla le mont" | cat -e
-mont le contempla il$
-$> ./rev_wstr | cat -e
-$
-$>*/
+#include <stdio.h>
+#include <stdlib.h>
+#include "ft_list.h"
 
-#include <unistd.h>
-
-
-void rev_wstr(char *str)
+int ft_list_size(t_list *begin_list)
 {
     int i = 0;
-    int start;
-    int end;
-    while (str[i])
-        i++;
-    while (i >= 0) //aqui no se puede poner while (str[i]) porque ya no existe claro!!
+
+    while (begin_list)
     {
-        while (str[i] == ' ' || str[i] == '\t' || str[i] == '\0')
-            i--;
-        end = i;
-        //ATENCION!!!en esta linea de abajo he fallado mucho y por eso no me daba!!
-        while (str[i] && str[i] != ' ' && str[i] != '\t') //mientras palabra
-            i--;
-        start = i + 1; //importante este +1 para estar dentro de la 1ra letra
-        int flag;
-        flag = start;
-        while (start <= end)
-        {
-            write(1, &str[start], 1);
-            start++;
-        }
-        if (flag != 0) //si flag no existe porque era igual a start y se ha acabado
-            write(1, " ", 1);
-    }       
+        begin_list = begin_list->next;
+        i++;
+    }
+
+    return(i);
 }
 
-int main(int ac, char **av)
-{
-    if (ac == 2)
-        rev_wstr(av[1]);
-    write(1, "\n", 1);
-    return (0);
+int main()
+{	
+	int a = 5;
+	int b = 7;
+	int c = 2;
+	int d = 4;
+    int e = 5;
+    int f = 6;
+
+	int *w;
+	int *x;
+	int *y;
+	int *z;
+    int *zz;
+    int *zzz;
+
+	w = &a;
+	x = &b;
+	y = &c;
+	z = &d;
+    zz = &e;
+    zzz = &f;
+	t_list *list1;
+	t_list *list2;
+	t_list *list3;
+	t_list *list4;
+    t_list *list5;
+    t_list *list6;
+	list1 = malloc(sizeof(t_list));
+	list2 = malloc(sizeof(t_list));
+	list3 = malloc(sizeof(t_list));
+	list4 = malloc(sizeof(t_list));
+    list5 = malloc(sizeof(t_list));
+    list6 = malloc(sizeof(t_list));
+	list1->data = (void *)w;
+	list2->data = (void *)x;
+	list3->data = (void *)y;
+	list4->data = (void *)z;
+	list1->next = list2;
+	list2->next = list3;
+	list3->next = list4;
+	list4->next = list5;
+    list5->next = list6;
+    list6->next = NULL;
+	printf("%d", ft_list_size(list1));
 }

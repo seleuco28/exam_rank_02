@@ -1,56 +1,37 @@
-/*Assignment name  : rostring
-Expected files   : rostring.c
-Allowed functions: write, malloc, free
+/*Assignment name  : ft_list_foreach
+Expected files   : ft_list_foreach.c, ft_list.h
+Allowed functions: 
 --------------------------------------------------------------------------------
 
-Write a program that takes a string and displays this string after rotating it
-one word to the left.
+Write a function that takes a list and a function pointer, and applies this
+function to each element of the list.
 
-Thus, the first word becomes the last, and others stay in the same order.
+It must be declared as follows:
 
-A "word" is defined as a part of a string delimited either by spaces/tabs, or
-by the start/end of the string.
+void    ft_list_foreach(t_list *begin_list, void (*f)(void *));
 
-Words will be separated by only one space in the output.
+The function pointed to by f will be used as follows:
 
-If there's less than one argument, the program displays \n.
+(*f)(list_ptr->data);
 
-Example:
+You must use the following structure, and turn it in as a file called
+ft_list.h:
 
-$>./rostring "abc   " | cat -e
-abc$
-$>
-$>./rostring "Que la      lumiere soit et la lumiere fut"
-la lumiere soit et la lumiere fut Que
-$>
-$>./rostring "     AkjhZ zLKIJz , 23y"
-zLKIJz , 23y AkjhZ
-$>
-$>./rostring "first" "2" "11000000"
-first
-$>
-$>./rostring | cat -e
-$
-$>*/
-
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-
-int main(int ac, char **av)
+typedef struct    s_list
 {
-	if (ac == 2)
-	{
-		int i = 0;
-		while (av[1][i] == ' ' || av[1][i] == '\t')
-			i++;
-		while ((av[1][i] >= 'a' && av[1][i] <= 'z') || (av[1][i] >= 'A' && av[1][i] <= 'Z'))
-		{
-			write(1, av[1][i], 1);
-			i++;
-		}
+    struct s_list *next;
+    void          *data;
+}                 t_list;*/
 
-	}
-	write(1, "\n", 1);
-	return (0)
+
+#include "ft_list.h"
+
+void    ft_list_foreach(t_list *begin_list, void (*f)(void *))
+{
+    while (begin_list)
+    {
+        if (begin_list->data)
+            (*f)(begin_list->data);
+        begin_list = begin_list->next
+    }
 }
