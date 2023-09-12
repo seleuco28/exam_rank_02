@@ -29,6 +29,7 @@ $
 $>*/
 
 #include <unistd.h>
+
 //a mi manera y funcionando
 void rev_wstr(char *str)
 {
@@ -39,7 +40,7 @@ void rev_wstr(char *str)
         i++;
     while (i >= 0) //aqui no se puede poner while (str[i]) porque ya no existe claro!!
     {
-        while (str[i] == ' ' || str[i] == '\t' || str[i] == '\0')
+        while (str[i] == ' ' || str[i] == '\t' || str[i] == '\0') //importante este '\0' porque en el primer supuesto siempre sera asi
             i--;
         end = i;
         //ATENCION!!!en esta linea de abajo he fallado mucho y por eso no me daba!!

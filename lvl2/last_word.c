@@ -43,12 +43,12 @@ void last_word(char *str)
 	int len = ft_strlen(str) - 1;
 
 
-	while (str[len] == ' ')
+	while (str[len] == ' ' || str[len] == '\t')
 		len--;
-	while (str[len] != ' ')
+	while (!(str[len] == ' ' || str[len] == '\t')) //si lo pones de la manera que lo suelo poner da segfault, no se xrke
 		len--;
-	len++;
-	while (str[len] != ' ' && str[len]) // IMPORTANTISIMO ESTET "Y QUE EXISTA" llevo toda la mañañana peleandome con eso
+	len++; //len++ para entrar en la palabra
+	while ((!(str[len] == ' ' || str[len] == '\t')) && str[len]) // IMPORTANTISIMO ESTET "Y QUE EXISTA" llevo toda la mañañana peleandome con eso
 	{
 		write(1, &str[len], 1);
 		len++;

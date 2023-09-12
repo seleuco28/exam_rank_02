@@ -1,46 +1,66 @@
-/*Assignment name  : ulstr
-Expected files   : ulstr.c
+/*Assignment name  : repeat_alpha
+Expected files   : repeat_alpha.c
 Allowed functions: write
 --------------------------------------------------------------------------------
 
-Write a program that takes a string and reverses the case of all its letters.
-Other characters remain unchanged.
+Write a program called repeat_alpha that takes a string and display it
+repeating each alphabetical character as many times as its alphabetical index,
+followed by a newline.
 
-You must display the result followed by a '\n'.
+'a' becomes 'a', 'b' becomes 'bb', 'e' becomes 'eeeee', etc...
 
-If the number of arguments is not 1, the program displays '\n'.
+Case remains unchanged.
 
-Examples :
+If the number of arguments is not 1, just display a newline.
 
-$>./ulstr "L'eSPrit nE peUt plUs pRogResSer s'Il staGne et sI peRsIsTent VAnIte et auto-justification." | cat -e
-l'EspRIT Ne PEuT PLuS PrOGrESsER S'iL STAgNE ET Si PErSiStENT vaNiTE ET AUTO-JUSTIFICATION.$
-$>./ulstr "S'enTOuRer dE sECreT eSt uN sIGnE De mAnQuE De coNNaiSSanCe.  " | cat -e
-s'ENtoUrER De SecREt EsT Un SigNe dE MaNqUe dE COnnAIssANcE.  $
-$>./ulstr "3:21 Ba  tOut  moUn ki Ka di KE m'en Ka fe fot" | cat -e
-3:21 bA  ToUT  MOuN KI kA DI ke M'EN kA FE FOT$
-$>./ulstr | cat -e
-$*/
+Examples:
+
+$>./repeat_alpha "abc"
+abbccc
+$>./repeat_alpha "Alex." | cat -e
+Alllllllllllleeeeexxxxxxxxxxxxxxxxxxxxxxxx.$
+$>./repeat_alpha 'abacadaba 42!' | cat -e
+abbacccaddddabba 42!$
+$>./repeat_alpha | cat -e
+$
+$>
+$>./repeat_alpha "" | cat -e
+$
+$>*/
 
 #include <unistd.h>
 
-void ulstr(char *str)
+int contador_letras(char c)
+{
+    int contador;
+    if (c >= 'a' && c <= 'z')
+        contador = (c - 'a') + 1;
+    else if (c >= 'A' && c <= 'Z')
+        contador = (c - 'A') + 1;
+    else 
+        contador = 1;
+    return(contador);
+}
+
+void repeat_alpha(char *str)
 {
     int i = 0;
+    int conteo;
     while (str[i])
     {
-        if (str[i] >= 'a' && str[i] <= 'z')
-            str[i] = str[i] - 32;
-        else if (str[i] >= 'A' && str[i] <= 'Z')
-            str[i] = str[i] + 32;
-        write(1, &str[i], 1);
+        conteo = contador_letras(str[i]);
+        while (conteo > 0)
+        {
+            write(1, &str[i], 1);
+            conteo--;
+        }
         i++;
     }
 }
-
 int main(int ac, char **av)
 {
     if (ac == 2)
-        ulstr(av[1]);
+        repeat_alpha(av[1]);
     write(1, "\n", 1);
     return 0;
 }

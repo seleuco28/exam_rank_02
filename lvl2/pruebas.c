@@ -1,48 +1,38 @@
-/*Assignment name  : reverse_bits
-Expected files   : reverse_bits.c
-Allowed functions:
+/*Assignment name  : ft_strcmp
+Expected files   : ft_strcmp.c
+Allowed functions: 
 --------------------------------------------------------------------------------
 
-Write a function that takes a byte, reverses it, bit by bit (like the
-example) and returns the result.
+Reproduce the behavior of the function strcmp (man strcmp).
 
 Your function must be declared as follows:
 
-unsigned char	reverse_bits(unsigned char octet);
+int    ft_strcmp(char *s1, char *s2);*/
 
-Example:
+#include <string.h>
+#include <stdio.h>
 
-  1 byte
-_____________
- 0010  0110
-	 ||
-	 \/
- 0110  0100*/
-
- #include <unistd.h>
- #include <stdio.h>
-
-unsigned char reverse_bits(unsigned char octet)
+int ft_strcmp(char *s1, char *s2)
 {
-    unsigned char r = 0;
-    unsigned char byte_len = 8;
-
-    while (byte_len--)
-    {
-        r = (r << 1) | (octet & 1);
-        octet >>= 1;
-    } 
-    return (r);
+	int i = 0;
+	while (s1[i])
+	{
+		if (s1[i] != s2[i])
+			return(s1[i] - s2[i]);
+		i++;
+	}
+	return(s1[i] - s2[i]);
 }
 
-int	main(void)
+int main()
 {
-	unsigned char c;
+	char *str1 = "hola";
+	char *str2 = "holb";
 
-	c = '.';
-	write(1, &c, 1);
-	write(1, "\n", 1);
-	c = reverse_bits(c);
-	write(1, &c, 1);
-	return (0);
+	char *str3 = "hola";
+	char *str4 = "holb";
+
+	printf("%d\n", strcmp(str1, str2));
+	printf("%d\n", ft_strcmp(str1, str2));
+	return 0;
 }

@@ -38,7 +38,7 @@ int main(int ac, char **av)
 	{
 		while (av[1][i] == ' ')
 			i++;
-		while (av[1][i] != ' ' && av[1][i])
+		while (av[1][i] != ' ' && av[1][i]) //IMPORTANTE EL y que exista
 			write(1, &av[1][i++], 1);
 	}			
 	write(1, "\n", 1);

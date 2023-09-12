@@ -31,7 +31,7 @@ void print_bits(unsigned char octet)
 }
 int main()
 {
-    int n = 20;
+    int n = 42;
     print_bits(n);
     printf("\n");
 }

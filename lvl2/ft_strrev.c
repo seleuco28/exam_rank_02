@@ -17,12 +17,12 @@ char    *ft_strrev(char *str);*/
 char *ft_strrev(char *str)
 {
 	int i = -1;
-	int len = 0;
+	int len = 0; //si no inicializo len, me da bus error
 	char tmp;
 
 	while (str[len])
 		len++;
-	while (++i < --len)
+	while (++i < --len) //hay que poner a len el -- delante porque strlen siempre se pasa uno CUIDADO
 	{
 		tmp = str[i];
 		str[i] = str[len];
