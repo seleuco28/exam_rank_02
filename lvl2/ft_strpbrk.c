@@ -43,14 +43,14 @@ int main(void)
     printf("%s\n", ft_strchr(tweet, 'a'));
 
     return(0);
-}
-*/
+}*/
+
 
 char *ft_strpbrk(const char *s1, const char *s2)
 {
     while (*s1)
     {
-        if (ft_strchr(s2, *s1))
+        if (ft_strchr(s2, *s1)) //argumentos dados la vuelta por que¿?¿?
             return ((char *)s1);
         s1++;
     }

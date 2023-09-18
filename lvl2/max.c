@@ -19,7 +19,7 @@ int max(int* tab, unsigned int len)
 
     i = 0;
     maximo = tab[i];
-    while (i < len)
+    while (i < len) //IMPORTANTE que no sea igual, sino cuenta una mas!!!
     {
         if (maximo < tab[i])
             maximo = tab[i];

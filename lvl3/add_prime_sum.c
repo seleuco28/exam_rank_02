@@ -84,7 +84,7 @@ void	add_prime_sum(int n)
 	if (n == 1)
 		count = 1;
 	i = 1;
-	while (++i <= n)
+	while (++i <= n) //si no pongo el ++i aqui delante me da problemas
 		if (is_prime(i))
 			count += i; //lo que habia mas 'i'
 	ft_putnbr(count);

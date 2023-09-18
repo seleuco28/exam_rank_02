@@ -31,7 +31,7 @@ $>*/
 //capitalizer a mi manera, FUNCINANDO
 void str_capitalizer(char *str)
 {
-    int i = 0;
+    int i = 0; //HAGO PRIMERO LA 1RA LETRA Y LGO LAS DEMAS
     if (str[i] >= 'a' && str[i] <= 'z') //si meto esta dentro del while me da error
         str[i] = str[i] - 32;
     write(1, &str[i], 1);
