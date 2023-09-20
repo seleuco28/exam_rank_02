@@ -52,7 +52,7 @@ void wdmatch(char *str1, char *str2)
 			i++;
 		j++;
 	}
-	if (!str1[i]) //importante esto!!!
+	if (!str1[i]) //IMPORTANTE ESTO!!!
 		ft_putstr(str1);
 }
 

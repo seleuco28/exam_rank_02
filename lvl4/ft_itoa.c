@@ -37,9 +37,9 @@ char *ft_itoa(int n)
 {
     int count = get_count(n); //get_count para ver cuantos nums hay que mallokear
     char *str;
-    str = (char *)malloc(sizeof(char) * count + 1);
+    str = (char *)malloc(sizeof(char) * count); //no haria falta el +1 xrke los arrays empiezan en 1
     str[count] = '\0';
-    if (!n)
+    if (!n) //OJO ESTO QUE SI NO SE PONE JALEO
         str[0] = '\0';
     while (n)
     {

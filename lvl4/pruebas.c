@@ -1,129 +1,80 @@
-/*Assignment name  : sort_list
-Expected files   : sort_list.c
-Allowed functions: 
+/*Assignment name  : rostring
+Expected files   : rostring.c
+Allowed functions: write, malloc, free
 --------------------------------------------------------------------------------
 
-Write the following functions:
+Write a program that takes a string and displays this string after rotating it
+one word to the left.
 
-t_list	*sort_list(t_list* lst, int (*cmp)(int, int));
+Thus, the first word becomes the last, and others stay in the same order.
 
-This function must sort the list given as a parameter, using the function 
-pointer cmp to select the order to apply, and returns a pointer to the 
-first element of the sorted list.
+A "word" is defined as a part of a string delimited either by spaces/tabs, or
+by the start/end of the string.
 
-Duplications must remain.
+Words will be separated by only one space in the output.
 
-Inputs will always be consistent.
+If there's less than one argument, the program displays \n.
 
-You must use the type t_list described in the file list.h 
-that is provided to you. You must include that file 
-(#include "list.h"), but you must not turn it in. We will use our own 
-to compile your assignment.
+Example:
 
-Functions passed as cmp will always return a value different from 
-0 if a and b are in the right order, 0 otherwise.
+$>./rostring "abc   " | cat -e
+abc$
+$>
+$>./rostring "Que la      lumiere soit et la lumiere fut"
+la lumiere soit et la lumiere fut Que
+$>
+$>./rostring "     AkjhZ zLKIJz , 23y"
+zLKIJz , 23y AkjhZ
+$>
+$>./rostring "first" "2" "11000000"
+first
+$>
+$>./rostring | cat -e
+$
+$>*/
 
-For example, the following function used as cmp will sort the list 
-in ascending order:
+#include <stdio.h>
+#include <unistd.h>
 
-int ascending(int a, int b)
+void first_word(char *str, int begin_space)
 {
-	return (a <= b);
-}*/
-
-#include <stdlib.h>
-#include "ft_list.h"
-
-void ft_swap(int *a, int *b)
-{
-	int temp;
-
-	temp = *a;
-	*a = *b;
-	*b = temp;
-}
-
-t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
-{
-    t_list *tmp;
-
-    tmp = lst;
-    while (lst->next != NULL)
-    {
-        if ((*cmp)(lst->data , lst->next->data) == 0)
-        {
-            ft_swap(&lst->data, &lst->next->data);
-            lst = tmp;
-        }
-        else
-            lst = lst->next;
-    }
-    lst = tmp;
-    return(lst);
-}
-
-#include <unistd.h> // For write // For write
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putnbr(int nbr)
-{
-	if (nbr < 0)
+	int i = begin_space;
+	while (str[i] && (!(str[i] == ' ' || str[i] == '\t')))
 	{
-		nbr = -nbr;
-		ft_putchar('-');
-	}
-	if (nbr >= 10)
-		ft_putnbr(nbr / 10);
-	ft_putchar((nbr % 10) + '0');
-}
-
-int	ascending(int a, int b)
-{
-	return (a <= b);
-}
-
-t_list	*ft_new_elem(int data)
-{
-	t_list	*node;
-
-	node = (t_list *)malloc(sizeof(t_list));
-	if (!node)
-		return (node = NULL);
-	node->data = data;
-	node->next = NULL;
-	return (node);
-}
-
-void	ft_list_foreach_space(t_list *begin_list, void (*f)(int))
-{
-	while (begin_list != NULL)
-	{
-		if (begin_list->data)
-			(*f)(begin_list->data);
-		ft_putchar(' ');
-		begin_list = begin_list->next;
+		write(1, &str[i], 1);
+		i++;
 	}
 }
 
-int	main(void)
+void rostring(char *str)
 {
-	t_list	*test_list;
+	int begin_space = 0;
+	while (str[begin_space] == ' ' || str[begin_space] == '\t')
+		begin_space++;
+	int i = begin_space;
+	while (str[i] && (!(str[i] == ' ' || str[i] == '\t')))
+		i++;
+	while (str[i])
+	{
+		if (str[i] && (str[i - 1] == ' ' || str[i - 1] == '\t') && (!(str[i] == ' ' || str[i] == '\t')))
+		{
+			while(str[i] && (!(str[i] == ' ' || str[i] == '\t')))
+			{	
+				write(1, &str[i], 1);
+				i++;
+			}
+			write(1, " ", 1);
+		}
+		i++;
+	}
+	first_word(str, begin_space);
+}
 
-	test_list = ft_new_elem(42);
-	test_list->next = ft_new_elem(666);
-	test_list->next->next = ft_new_elem(69);
-	test_list->next->next->next = ft_new_elem(420);
-	test_list->next->next->next->next = ft_new_elem(669);
-	test_list->next->next->next->next->next = ft_new_elem(42);
-	test_list->next->next->next->next->next->next = ft_new_elem(0);
-	ft_list_foreach_space(test_list, (void *)ft_putnbr);
-	sort_list(test_list, ascending);
-	ft_putchar('\n');
-	ft_list_foreach_space(test_list, (void *)ft_putnbr);
-	ft_putchar('\n');
-	return (0);
+int main(int ac, char **av)
+{
+	if (ac > 1)
+		rostring(av[1]);
+	else
+		write(1, "\n", 1);
+	return 0;
 }

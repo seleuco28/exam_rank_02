@@ -24,7 +24,7 @@ void sort_int_tab(int *tab, unsigned int size)
 
 	while (i < (size - 1)) //y poner un size - 1 para que no pete el while
 	{
-		if (tab[i] > tab[i + 1]) //haces el swap y vuelves a empezar el array
+		if (tab[i] > tab[i + 1]) //haces el swap Y VUELVES A EMPEZAR, IMPORTANTE
 		{
 			temp = tab[i];
 			tab[i] = tab[i + 1];

@@ -62,6 +62,9 @@ t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
 	return(lst);
 }
 
+////////////////////////////////// HASTA AQUI EL CÓDIGO //////////////////////
+
+
 #include <unistd.h> // For write // For write
 
 void	ft_putchar(char c)

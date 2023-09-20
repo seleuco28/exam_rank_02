@@ -42,7 +42,7 @@ void hidenp(char *str1, char *str2)
 			i++;
 		j++;
 	}
-	if (str1[i])
+	if (str1[i]) // IMPORTANTE ESTO, parecido a wdmatch
 		write(1, "0", 1);
 	else if (!str1[i])
 		write(1, "1", 1);

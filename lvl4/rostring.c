@@ -33,110 +33,110 @@ $>./rostring | cat -e
 $
 $>*/
 
-#include <stdio.h>
 #include <unistd.h>
-#include <stdlib.h>
 
 
-// a mi manera y funciona, mucho mejor que los otros WIIIIII
-void first_word(char *str)
+//A MI MANERA Y FUNCIONA, (esta vez siiii)
+void first_word(char *str, int begin_space)
 {
-	int i = 0;
-	write(1, " ", 1); //añado esto para dejar un ultimo hueco entre las dos ultimas palabras
-	while (str[i] == ' ' || str[i] == '\t')
-		i++;
-	while (str[i] >= 33 && str[i] <= 126) //si es caracter imprimible //estamos en 1ra palabra
+	int i = begin_space;
+	while (str[i] && (!(str[i] == ' ' || str[i] == '\t')))
 	{
 		write(1, &str[i], 1);
 		i++;
-	}	
+	}
 }
 
 void rostring(char *str)
 {
-	int i = 0;
-	int flag = 0;
-	while (str[i] == ' ' || str[i] == '\t')
+	int begin_space = 0;
+	int i;
+	while (str[begin_space] == ' ' || str[begin_space] == '\t')
+		begin_space++;
+	i = begin_space;
+	while (str[i] && (!(str[i] == ' ' || str[i] == '\t'))) //me salto toda la primera palabra
 		i++;
-	while (str[i] >= 33 && str[i] <= 126) //si es caracter imprimible //estamos en 1ra palabra
-		i++;
-	i++; // ATENCION PONGO AQUI UN i++; porque si no me pilla el 1er espacio y me lo pone!!
 	while (str[i])
 	{
-		if (str[i] == ' ' || str[i] == '\t')
-			flag = 1;
-		if (str[i] >= 33 && str[i] <= 126)
+		if (str[i] && (str[i - 1] == ' ' || str[i - 1] == '\t') && (!(str[i] == ' ' || str[i] == '\t')))
 		{
-			if (flag == 1)
+			while (str[i] && (!(str[i] == ' ' || str[i] == '\t'))) // IMPORTANTISIMO PORNER Y QUE EXISTA!!
 			{
-				write(1, " ", 1);
-				flag = 0;
-			}
-			write(1, &str[i], 1);
-		}
-		i++;
-	}
-}
-
-int main(int ac, char **av)
-{
-	if (ac == 2)
-	{
-		rostring(av[1]);
-		first_word(av[1]);
-	}
-	write(1, "\n", 1);
-	return 0;
-}
-
-/*
-int ft_isspace(char c)
-{
-	if (c == ' ' || c == '	')
-		return (1);
-	return (0);
-}
-
-void rostring(char *s)
-{
-	int flag = 0;
-	while (ft_isspace(*s) && *s)
-		s++;
-	int i = -1;
-	while (s[++i])
-		i++;
-	i = 0;
-	while (!ft_isspace(s[i]) && s[i])
-		i++;
-	while (ft_isspace(s[i]) && s[i])
-		i++;
-	while (s[i])
-	{
-		if (!ft_isspace(s[i]))
-		{
-			while(!ft_isspace(s[i]) && s[i])
-			{
-				write(1, &s[i], 1);
+				write(1, &str[i], 1);
 				i++;
 			}
-			flag = 1;
-			if (s[i])
-				write(1, " ", 1);
+			write(1, " ", 1);
 		}
-		while (ft_isspace(s[i]) && s[i])
-			i++;
+		i++;
 	}
-	if (flag)
-		write(1, " ", 1);
-	i = 0;
-	while(s[i] && !ft_isspace(s[i]))
-		write(1, &s[i++], 1);
+	first_word(str, begin_space);
 }
 
 int main(int ac, char **av)
 {
 	if (ac > 1)
 		rostring(av[1]);
-	write(1, "\n", 1);
+	else
+		write(1, "\n", 1);
+	return 0;
+}
+
+
+/*
+#include <unistd.h>
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+int	is_space(char c)
+{
+	if ((c == ' ') || (c == '\t'))
+		return (1);
+	return (0);
+}
+
+void	ft_print_first_word(char *str, int begin_space)
+{
+	while (str[begin_space] != '\0' && !is_space(str[begin_space]))
+	{
+		ft_putchar(str[begin_space]);
+		begin_space++;
+	}
+}
+
+void	rostring(char *str)
+{
+	int	idx;
+	int	begin_space;
+
+	begin_space = 0;
+	while (str[begin_space] != '\0' && is_space(str[begin_space]))
+		begin_space++;
+	idx = begin_space;
+	while (str[idx] != '\0' && !is_space(str[idx])) 
+		idx++; //aqui me quedo despues de la 1ra palabra
+	while (str[idx] != '\0')
+	{
+		if (str[idx] != '\0' && !is_space(str[idx]) && is_space(str[idx - 1])) //si esta no es espacio y la anterior si
+		{
+			while (str[idx] != '\0' && !is_space(str[idx])) //printa mientras no sea espacio
+			{
+				ft_putchar(str[idx]);
+				idx++;
+			}
+			ft_putchar(' '); //printa espacio
+		}
+		idx++;
+	}
+	ft_print_first_word(str, begin_space);
+}
+
+int	main(int argc, char **argv)
+{
+	if (argc > 1)
+		rostring(argv[1]);
+	ft_putchar('\n');
 	return (0);
 }*/

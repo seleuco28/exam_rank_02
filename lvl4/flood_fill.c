@@ -100,9 +100,11 @@ void	fill(char **tab, t_point size, t_point begin, char to_fill)
 
 void	flood_fill(char **tab, t_point size, t_point begin)
 {
-	fill(tab, size, begin, tab[begin.y][begin.x]);
+	fill(tab, size, begin, tab[begin.y][begin.x]); //este 4to arg seria el caracter con el que fillearlo
 }
 
+
+//////////////////////HASTA AQUI EL EJERCICIO////////////////////
 
 #include <stdlib.h>
 #include <stdio.h>
