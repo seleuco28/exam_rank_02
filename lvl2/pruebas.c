@@ -1,29 +1,39 @@
+/*Assignment name  : ft_strdup
+Expected files   : ft_strdup.c
+Allowed functions: malloc
+--------------------------------------------------------------------------------
 
-#include <unistd.h>
+Reproduce the behavior of the function strdup (man strdup).
 
-unsigned char	reverse_bits(unsigned char octet)
+Your function must be declared as follows:
+
+char    *ft_strdup(char *src);*/
+
+#include <stdlib.h>
+#include <stdio.h>
+
+char *ft_strdup(char *src)
 {
-	unsigned char r = 0;
-	int byte_len = 8;
+	char *string;
+	int i = 0;
 
-	while (byte_len--)
+	while (src[i])
+		i++;
+	string = malloc(sizeof(char) * i + 1);
+	i = 0;
+	while (src[i])
 	{
-		r = (r << 1) | (octet & 1);
-		octet >>= 1;
+		string[i] = src[i];
+		i++;
 	}
-
-	return (r);
+	string[i] = '\0';
+	return(string);
 }
 
-
-int	main(void)
+int main()
 {
-	unsigned char c;
+	char hola[] = "holaaaa";
+	printf("%s", ft_strdup(hola));
 
-	c = '.';
-	write(1, &c, 1);
-	write(1, "\n", 1);
-	c = reverse_bits(c);
-	write(1, &c, 1);
-	return (0);
+	return 0;
 }

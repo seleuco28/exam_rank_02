@@ -34,7 +34,7 @@ int atoi_simple(char *s)
 	return (sum);
 }
 
-void putnbr_hex(int i)
+void print_hex(int i)
 {
 	char base[16] = "0123456789abcdef";
 
@@ -43,8 +43,8 @@ void putnbr_hex(int i)
 	{
 		c = base[i % 16];
 		i = i / 16;
-		putnbr_hex(i);
-		write(1, &c, 1);
+		print_hex(i);
+		write(1, &c, 1); //EL WRITE SIEMPRE LO ULTIMO!!	
 	}
 	else 
 	{
@@ -53,16 +53,11 @@ void putnbr_hex(int i)
 	}
 }
 
-void print_hex(char *s)
-{
-	int num = atoi_simple(s);
-	putnbr_hex(num);
-}
 
 int main(int ac, char **av)
 {
 	if (ac == 2)
-		print_hex(av[1]);
+		print_hex(atoi_simple(av[1]));
 	write(1, "\n", 1);
 	return(0);
 }

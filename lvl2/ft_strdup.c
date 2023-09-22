@@ -31,7 +31,7 @@ char *ft_strdup(const char *s1)
         str[i] = s1[i];
         i++;
     }
-    str[i] = '\0';
+    str[i] = '\0'; //importante este cero al final!!!
     return (str);
 }
 

@@ -1,69 +1,49 @@
-/*Assignment name  : rev_wstr
-Expected files   : rev_wstr.c
-Allowed functions: write, malloc, free
+/*Assignment name  : print_hex
+Expected files   : print_hex.c
+Allowed functions: write
 --------------------------------------------------------------------------------
 
-Write a program that takes a string as a parameter, and prints its words in 
-reverse order.
+Write a program that takes a positive (or zero) number expressed in base 10,
+and displays it in base 16 (lowercase letters) followed by a newline.
 
-A "word" is a part of the string bounded by spaces and/or tabs, or the 
-begin/end of the string.
-
-If the number of parameters is different from 1, the program will display 
-'\n'.
-
-In the parameters that are going to be tested, there won't be any "additional" 
-spaces (meaning that there won't be additionnal spaces at the beginning or at 
-the end of the string, and words will always be separated by exactly one space).
+If the number of parameters is not 1, the program displays a newline.
 
 Examples:
 
-$> ./rev_wstr "le temps du mepris precede celui de l'indifference" | cat -e
-l'indifference de celui precede mepris du temps le$
-$> ./rev_wstr "abcdefghijklm"
-abcdefghijklm
-$> ./rev_wstr "il contempla le mont" | cat -e
-mont le contempla il$
-$> ./rev_wstr | cat -e
-$
-$>*/
+$> ./print_hex "10" | cat -e
+a$
+$> ./print_hex "255" | cat -e
+ff$
+$> ./print_hex "5156454" | cat -e
+4eae66$
+$> ./print_hex | cat -e
+$*/
 
-
+#include <stdlib.h>
 #include <unistd.h>
 
-void revwstr(char *str)
+void print_hex(int i)
 {
-	int i = 0;
-	int start;
-	int end;
-	int flag;
-	while (str[i])
-		i++;
-	while (i >= 0)
+	char base[16] = "0123456789abcdef";
+	char c;
+	if (i >= 16)
 	{
-		while (str[i] == ' ' || str[i] == '\t' || str[i] == '\0')
-			i--;
-		end = i;
-		while (str[i] && (!(str[i] == ' ' || str[i] == '\t'))) //comprobar a quitar el Y QUE EXISTA
-			i--;
-		start = i + 1;
-		flag = start;
-		while (start <= end)
-		{
-			write(1, &str[start], 1);
-			start++;
-		}
-		if (flag != 0)
-		{
-			write(1, " ", 1);
-		}
+		c = base[i % 16];
+		i = i / 16;
+		print_hex(i);
+		write(1, &c, 1);
+	}		
+	else
+	{
+		c = base[i % 16];
+		write(1, &c, 1);
 	}
 }
 
 int main(int ac, char **av)
 {
 	if (ac == 2)
-		revwstr(av[1]);
+		print_hex(atoi(av[1]));
 	write(1, "\n", 1);
 	return 0;
 }

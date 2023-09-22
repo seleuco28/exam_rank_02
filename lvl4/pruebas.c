@@ -1,80 +1,146 @@
-/*Assignment name  : rostring
-Expected files   : rostring.c
-Allowed functions: write, malloc, free
+/*Assignment name  : flood_fill
+Expected files   : *.c, *.h
+Allowed functions: -
 --------------------------------------------------------------------------------
 
-Write a program that takes a string and displays this string after rotating it
-one word to the left.
+Write a function that takes a char ** as a 2-dimensional array of char, a
+t_point as the dimensions of this array and a t_point as the starting point.
 
-Thus, the first word becomes the last, and others stay in the same order.
+Starting from the given 'begin' t_point, this function fills an entire zone
+by replacing characters inside with the character 'F'. A zone is an group of
+the same character delimitated horizontally and vertically by other characters
+or the array boundry.
 
-A "word" is defined as a part of a string delimited either by spaces/tabs, or
-by the start/end of the string.
+The flood_fill function won't fill diagonally.
 
-Words will be separated by only one space in the output.
+The flood_fill function will be prototyped like this:
+  void  flood_fill(char **tab, t_point size, t_point begin);
 
-If there's less than one argument, the program displays \n.
+The t_point structure is prototyped like this:
+
+  typedef struct  s_point
+  {
+    int           x;
+    int           y;
+  }               t_point;
 
 Example:
 
-$>./rostring "abc   " | cat -e
-abc$
-$>
-$>./rostring "Que la      lumiere soit et la lumiere fut"
-la lumiere soit et la lumiere fut Que
-$>
-$>./rostring "     AkjhZ zLKIJz , 23y"
-zLKIJz , 23y AkjhZ
-$>
-$>./rostring "first" "2" "11000000"
-first
-$>
-$>./rostring | cat -e
-$
+$> cat test.c
+#include <stdlib.h>
+#include <stdio.h>
+#include "flood_fill.h"
+
+char** make_area(char** zone, t_point size)
+{
+	char** new;
+
+	new = malloc(sizeof(char*) * size.y);
+	for (int i = 0; i < size.y; ++i)
+	{
+		new[i] = malloc(size.x + 1);
+		for (int j = 0; j < size.x; ++j)
+			new[i][j] = zone[i][j];
+		new[i][size.x] = '\0';
+	}
+
+	return new;
+}
+
+int main(void)
+{
+	t_point size = {8, 5};
+	char *zone[] = {
+		"11111111",
+		"10001001",
+		"10010001",
+		"10110001",
+		"11100001",
+	};
+
+	char**  area = make_area(zone, size);
+	for (int i = 0; i < size.y; ++i)
+		printf("%s\n", area[i]);
+	printf("\n");
+
+	t_point begin = {7, 4};
+	flood_fill(area, size, begin);
+	for (int i = 0; i < size.y; ++i)
+		printf("%s\n", area[i]);
+	return (0);
+}
+
+$> gcc flood_fill.c test.c -o test; ./test
+11111111
+10001001
+10010001
+10110001
+11100001
+
+FFFFFFFF
+F000F00F
+F00F000F
+F0FF000F
+FFF0000F
 $>*/
 
+#include "flood_fill.h"
+
+void fill(char **tab, t_point size, t_point begin, char to_fill)
+{
+	if (begin.y < 0 || begin.y >= size.y || begin.x < 0 || begin.x >= size.x
+		|| tab[begin.y][begin.x] != to_fill)
+		return;
+	tab[begin.y][begin.x] = 'F';
+	fill(tab, size, (t_point){begin.x - 1, begin.y}, to_fill);
+	fill(tab, size, (t_point){begin.x + 1, begin.y}, to_fill);
+	fill(tab, size, (t_point){begin.x, begin.y - 1}, to_fill);
+	fill(tab, size, (t_point){begin.x, begin.y + 1}, to_fill);
+
+}
+void  flood_fill(char **tab, t_point size, t_point begin)
+{
+	fill(tab, size, begin, tab[begin.y][begin.x]);
+}
+
+#include <stdlib.h>
 #include <stdio.h>
-#include <unistd.h>
 
-void first_word(char *str, int begin_space)
+char** make_area(char** zone, t_point size)
 {
-	int i = begin_space;
-	while (str[i] && (!(str[i] == ' ' || str[i] == '\t')))
+	char** new;
+
+	new = malloc(sizeof(char*) * size.y);
+	for (int i = 0; i < size.y; ++i)
 	{
-		write(1, &str[i], 1);
-		i++;
+		new[i] = malloc(size.x + 1);
+		for (int j = 0; j < size.x; ++j)
+			new[i][j] = zone[i][j];
+		new[i][size.x] = '\0';
 	}
+
+	return new;
 }
 
-void rostring(char *str)
+int main(void)
 {
-	int begin_space = 0;
-	while (str[begin_space] == ' ' || str[begin_space] == '\t')
-		begin_space++;
-	int i = begin_space;
-	while (str[i] && (!(str[i] == ' ' || str[i] == '\t')))
-		i++;
-	while (str[i])
-	{
-		if (str[i] && (str[i - 1] == ' ' || str[i - 1] == '\t') && (!(str[i] == ' ' || str[i] == '\t')))
-		{
-			while(str[i] && (!(str[i] == ' ' || str[i] == '\t')))
-			{	
-				write(1, &str[i], 1);
-				i++;
-			}
-			write(1, " ", 1);
-		}
-		i++;
-	}
-	first_word(str, begin_space);
-}
+	t_point size = {8, 5};
+	char *zone[] = {
+		"11111111",
+		"10001001",
+		"10010001",
+		"10110001",
+		"11100001",
+	};
 
-int main(int ac, char **av)
-{
-	if (ac > 1)
-		rostring(av[1]);
-	else
-		write(1, "\n", 1);
-	return 0;
+	char**  area = make_area(zone, size);
+	for (int i = 0; i < size.y; ++i)
+		printf("%s\n", area[i]);
+	printf("\n");
+
+	t_point begin = {7, 4};
+	flood_fill(area, size, begin);
+	for (int i = 0; i < size.y; ++i)
+		printf("%s\n", area[i]);
+	return (0);
 }
