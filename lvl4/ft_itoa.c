@@ -40,33 +40,33 @@ int main()
 
 char	*ft_itoa(int nbr)
 {
-	int		index;
+	int		count;
 	long	number;
-	char	*string;
+	char	*str;
 
 	number = nbr;
-	index = get_count(number);
-	string = ((char *)malloc(index + 1));
-	if (!string)
+	count = get_count(number);
+	str = ((char *)malloc(count + 1));
+	if (!str)
 		return (NULL);
-	string[index--] = '\0';
+	str[count--] = '\0';
 	if (number == 0)
-		string[0] = '0';
+		str[0] = '0';
 	else
 	{
 		if (number < 0)
 		{
-			string[0] = '-';
+			str[0] = '-';
 			number *= -1;
 		}
 		while (number > 0)
 		{
-			string[index] = (number % 10) + '0';
+			str[count] = (number % 10) + '0';
 			number /= 10;
-			index--;
+			count--;
 		}
 	}
-	return (string);
+	return (str);
 }
 
 
