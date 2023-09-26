@@ -14,11 +14,16 @@ char	*ft_itoa(int nbr);*/
 #include <unistd.h>
 #include <stdlib.h>
 
-int get_count(int n)
+int get_count(long n)
 {
     int i = 0;
-    //if (!n)
-    //    return (1); esto es necesario¿?¿?¿?¿?¿?¿?
+    if (n == 0)
+        return(1);
+    if (n < 0)
+    {
+        n = n * -1;
+        i++;
+    }
     while (n)
     {
         n = n / 10;
@@ -33,26 +38,48 @@ int main()
     return (0);
 }*/
 
-char *ft_itoa(int n)
+char	*ft_itoa(int nbr)
 {
-    int count = get_count(n); //get_count para ver cuantos nums hay que mallokear
-    char *str;
-    str = (char *)malloc(sizeof(char) * count); //no haria falta el +1 xrke los arrays empiezan en 1
-    str[count] = '\0';
-    if (!n) //OJO ESTO QUE SI NO SE PONE JALEO
-        str[0] = '\0';
-    while (n)
-    {
-        str[--count] = n % 10 + '0'; // --count al principio para que no te encuentres con el /0
-        n = n / 10;
-    }
-    return (str);
+	int		index;
+	long	number;
+	char	*string;
+
+	number = nbr;
+	index = get_count(number);
+	string = ((char *)malloc(index + 1));
+	if (!string)
+		return (NULL);
+	string[index--] = '\0';
+	if (number == 0)
+		string[0] = '0';
+	else
+	{
+		if (number < 0)
+		{
+			string[0] = '-';
+			number *= -1;
+		}
+		while (number > 0)
+		{
+			string[index] = (number % 10) + '0';
+			number /= 10;
+			index--;
+		}
+	}
+	return (string);
 }
 
-int main()
+
+
+int	main(void)
 {
-    char *str;
-    str = ft_itoa(122);
-    printf("%s\n", str);
-    return (0);
+	printf("%s\n", ft_itoa(0));
+	printf("%s\n", ft_itoa(1));
+	printf("%s\n", ft_itoa(42));
+	printf("%s\n", ft_itoa(1001));
+	printf("%s\n", ft_itoa(-0));
+	printf("%s\n", ft_itoa(-2));
+	printf("%s\n", ft_itoa(-24));
+	printf("%s\n", ft_itoa(-2147483648));
+	printf("%s\n", ft_itoa(2147483647));
 }

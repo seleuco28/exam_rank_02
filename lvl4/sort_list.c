@@ -45,6 +45,7 @@ void ft_swap(int *a, int *b)
 
 t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
 {
+	//si quito la variable temp, los numeros repes no me los ordena!!
 	t_list *tmp;
 
 	tmp = lst;
@@ -53,7 +54,7 @@ t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
 		if ((*cmp)(lst->data, lst->next->data) == 0) //si da zero no esta ordenado
 		{
 			ft_swap(&lst->data, &lst->next->data); //swapeas
-			lst = tmp; //aqui por que vuelve a ser la original?¿
+			lst = tmp; //aqui vuelve a la original para checkear numeros repes
 		}
 		else
 			lst = lst->next;
