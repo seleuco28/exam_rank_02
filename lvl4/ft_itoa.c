@@ -21,7 +21,7 @@ int get_count(long n)
         return(1);
     if (n < 0)
     {
-        n = n * -1;
+        //n = n * -1; //esto esta puesto pero en principio no haria falta
         i++;
     }
     while (n)
@@ -34,7 +34,7 @@ int get_count(long n)
 /*
 int main()
 {
-    printf("%d", get_count(4884));
+    printf("%d", get_count(-4884));
     return (0);
 }*/
 
