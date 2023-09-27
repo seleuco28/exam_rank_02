@@ -22,7 +22,7 @@ void sort_int_tab(int *tab, unsigned int size)
 	int i = 0; //hay que inicializar a 0, obvio
 	int temp;
 
-	while (i < (size - 1)) //y poner un size - 1 para que no pete el while
+	while (i < (size - 1)) //y poner un size - 1 para que no pete el while //NO SE SI HAY QUE PONER EL SIZE -1 O NO
 	{
 		if (tab[i] > tab[i + 1]) //haces el swap Y VUELVES A EMPEZAR, IMPORTANTE
 		{
@@ -31,7 +31,7 @@ void sort_int_tab(int *tab, unsigned int size)
 			tab[i + 1] = temp;
 			i = 0;
 		}
-		else //si no pongo este else me da mal!!!
+		else //si no pongo este else me da mal!!! ATENCION!!!!!S
 			i++;
 	}
 }
