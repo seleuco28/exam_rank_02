@@ -1,52 +1,46 @@
-/*Assignment name  : search_and_replace
-Expected files   : search_and_replace.c
-Allowed functions: write, exit
+/*Assignment name  : ulstr
+Expected files   : ulstr.c
+Allowed functions: write
 --------------------------------------------------------------------------------
 
-Write a program called search_and_replace that takes 3 arguments, the first 
-arguments is a string in which to replace a letter (2nd argument) by
-another one (3rd argument).
+Write a program that takes a string and reverses the case of all its letters.
+Other characters remain unchanged.
 
-If the number of arguments is not 3, just display a newline.
+You must display the result followed by a '\n'.
 
-If the second argument is not contained in the first one (the string)
-then the program simply rewrites the string followed by a newline.
+If the number of arguments is not 1, the program displays '\n'.
 
-Examples:
-$>./search_and_replace "Papache est un sabre" "a" "o"
-Popoche est un sobre
-$>./search_and_replace "zaz" "art" "zul" | cat -e
-$
-$>./search_and_replace "zaz" "r" "u" | cat -e
-zaz$
-$>./search_and_replace "jacob" "a" "b" "c" "e" | cat -e
-$
-$>./search_and_replace "ZoZ eT Dovid oiME le METol." "o" "a" | cat -e
-ZaZ eT David aiME le METal.$
-$>./search_and_replace "wNcOre Un ExEmPle Pas Facilw a Ecrirw " "w" "e" | cat -e
-eNcOre Un ExEmPle Pas Facile a Ecrire $*/
+Examples :
+
+$>./ulstr "L'eSPrit nE peUt plUs pRogResSer s'Il staGne et sI peRsIsTent VAnIte et auto-justification." | cat -e
+l'EspRIT Ne PEuT PLuS PrOGrESsER S'iL STAgNE ET Si PErSiStENT vaNiTE ET AUTO-JUSTIFICATION.$
+$>./ulstr "S'enTOuRer dE sECreT eSt uN sIGnE De mAnQuE De coNNaiSSanCe.  " | cat -e
+s'ENtoUrER De SecREt EsT Un SigNe dE MaNqUe dE COnnAIssANcE.  $
+$>./ulstr "3:21 Ba  tOut  moUn ki Ka di KE m'en Ka fe fot" | cat -e
+3:21 bA  ToUT  MOuN KI kA DI ke M'EN kA FE FOT$
+$>./ulstr | cat -e
+$*/
 
 #include <unistd.h>
 
-void search_and_replace(char *str, char *se, char *re)
+void ulstr(char *str)
 {
     int i = 0;
-    if (!(se[1] || re[1]))
+    while (str[i])
     {
-        while (str[i])
-        {
-            if (str[i] == *se)
-                write(1, re, 1);
-            else
-                write(1, &str[i], 1);
-            i++;
-        }
+        if (str[i] >= 'a' && str[i] <= 'z')
+            str[i] -= 32;
+        else if (str[i] >= 'A' && str[i] <= 'Z')
+            str[i] += 32;
+        write(1, &str[i], 1);
+        i++;
     }
 }
+
 int main(int ac, char **av)
 {
-    if (ac == 4)
-        search_and_replace(av[1], av[2], av[3]);
+    if (ac == 2)
+        ulstr(av[1]);
     write(1, "\n", 1);
     return 0;
 }

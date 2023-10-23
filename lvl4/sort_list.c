@@ -32,7 +32,12 @@ int ascending(int a, int b)
 }*/
 
 #include <stdlib.h>
-#include "ft_list.h"
+#include "ft_list.h" //ESTO PONERLO PARA QUE COMPILE
+
+////////////////////////CUIDADO AQUI/////////////////////
+//PERO EN EL EXAMEN EL ENUNCIADO TE PIDE EXPLICITAMENTE 
+//#include "list.h" //y que este vacio (ellos lo llenan entiendo)
+
 
 void ft_swap(int *a, int *b)
 {

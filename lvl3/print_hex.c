@@ -24,32 +24,32 @@ $*/
 
 int atoi_simple(char *s)
 {
-	int sum = 0;
+	int resultado = 0; // IMPORTANTE NO OLVIDAR EL IGUALAR ESTO, sino fallo por todos lados
 
 	while (*s)
 	{
-		sum = sum * 10 + *s - '0';
+		resultado = resultado * 10 + *s - '0';
 		s++;
 	}
-	return (sum);
+	return (resultado);
 }
 
 void print_hex(int i)
 {
 	char base[16] = "0123456789abcdef";
 
-	char c;
+	char numero;
 	if (i >= 16) //ojo aqui que si no pones el igual el num 16 te da mal!!
 	{
-		c = base[i % 16];
+		numero = base[i % 16];
 		i = i / 16;
 		print_hex(i);
-		write(1, &c, 1); //EL WRITE SIEMPRE LO ULTIMO!!	
+		write(1, &numero, 1); //EL WRITE SIEMPRE LO ULTIMO!!	
 	}
 	else 
 	{
-		c = base[i % 16];
-		write(1, &c, 1);
+		numero = base[i % 16];
+		write(1, &numero, 1);
 	}
 }
 

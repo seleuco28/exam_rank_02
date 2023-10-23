@@ -74,10 +74,9 @@ void rostring(char *str)
 
 int main(int ac, char **av)
 {
-	if (ac > 1)
+	if (ac > 1) //el rostring asi da bien, antes lo tenia mal (comprobado por la máquina)
 		rostring(av[1]);
-	else
-		write(1, "\n", 1);
+	write(1, "\n", 1);
 	return 0;
 }
 

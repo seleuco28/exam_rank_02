@@ -22,24 +22,24 @@ int	ft_atoi_base(const char *str, int str_base);*/
 #include <stdio.h>
 #include <stdlib.h>
 
-char	to_lower(char c)
+char	to_lower(char c) //en todas las bases que me pasen, quiero que las letras sean minusculas
 {
 	if (c >= 'A' && c <= 'Z')
-		return (c + ('a' - 'A')); // o + 32
+		return (c + 32);
 	return (c);
 }
 
 int get_digit(char c, int str_base) //usamos esto para darle la posicion del char dentro de la base
 {
-	int max_digit;
+	int max_digit; //posicionamos el ultimo valor de la base que queramos
 	if (str_base <= 10)
 		max_digit = str_base + '0';
 	else
-		max_digit = str_base - 10 + 'a';
+		max_digit = str_base - 10 + 'a'; //aqui por ejemplo, si es 11 -> (11 - 10 = 1) + a
 
-	if (c >= '0' && c <= '9' && c <= max_digit)
+	if (c >= '0' && c <= '9' && c <= max_digit) //aqui por ejemplo retorna 8 - 0 = 8
 		return (c - '0');
-	else if (c >= 'a' && c <= 'f' && c <= max_digit)
+	else if (c >= 'a' && c <= 'f' && c <= max_digit) //aqui retorna por ejemplo: (si 'b') 10 + 'b' - 'a' = 11
 		return (10 + c - 'a');
 	else
 		return (-1);
@@ -47,28 +47,28 @@ int get_digit(char c, int str_base) //usamos esto para darle la posicion del cha
 
 int ft_atoi_base(const char *str, int str_base)
 {
-	int result = 0;
-	int sign = 1;
+	int resultado = 0;
+	int signo = 1;
 	int digit;
 
 	if (*str == '-')
 	{
-		sign = -1;
+		signo = -1;
 		++str;
 	}
 
-	while ((digit = get_digit(to_lower(*str), str_base)) >= 0)
+	while ((digit = get_digit(to_lower(*str), str_base)) >= 0) //llega un momento en que get_digit() retorna -1 y se sale
 	{
-		result = result * str_base;
-		result = result + (digit * sign);
+		resultado = resultado * str_base + (digit);
 		++str;
 	}
-	return (result);
+	return (signo * resultado);
 }
 
 int	main()
 {		
 	printf("%d\n", ft_atoi_base("-4D2" , 16)); // esto es 1234
 	printf("%d\n", ft_atoi_base("-10011010010", 2)); // esto tambien
+	printf("%d\n", ft_atoi_base("-1234" , 10)); // esto es 1234
 	return (0);
 }

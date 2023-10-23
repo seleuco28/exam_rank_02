@@ -16,7 +16,7 @@ char    **ft_split(char *str);*/
 #include <stdlib.h>
 #include <stdio.h>
 
-int	ft_wordlen(char *str)
+int	ft_wordlen(char *str) //mido la len de una palabra
 {
 	int i = 0;
 
@@ -25,7 +25,7 @@ int	ft_wordlen(char *str)
 	return (i);
 }
 
-char	*word_dupe(char *str)
+char	*word_dupe(char *str) // le hago malloc a la palabra y copio el string original
 {
 	int i = 0;
 	int len = ft_wordlen(str);
@@ -43,17 +43,18 @@ char	*word_dupe(char *str)
 void	fill_words(char **array, char *str)
 {
 	int word_index = 0;
-	
-	while (*str == ' ' || *str == '\t' || *str == '\n')
-		++str;
-	while (*str != '\0')
+	int i = 0;
+
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n') //me salto los primeros espacios
+		++i;
+	while (str[i])
 	{
 		array[word_index] = word_dupe(str);
 		++word_index;
-		while (*str != '\0' && *str != ' ' && *str != '\t' && *str != '\n')
-			++str;
-		while (*str == ' ' || *str == '\t' || *str == '\n')
-			++str;
+		while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
+			++i;
+		while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+			++i;
 	}
 }
 
@@ -93,7 +94,7 @@ int main(void)
     char **tab;
     tab = ft_split("Hello world como estamos?");
 
-    while (i < 5)
+    while (i < 4)
     {
         printf("%s\n", tab[i]);
         i++;

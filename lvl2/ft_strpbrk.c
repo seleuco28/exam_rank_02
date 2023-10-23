@@ -45,24 +45,24 @@ int main(void)
     return(0);
 }*/
 
-
+//en el momento en que coincida algo del s2 en s1, return a todo eso
 char *ft_strpbrk(const char *s1, const char *s2)
 {
     while (*s1)
     {
-        if (ft_strchr(s2, *s1)) //argumentos dados la vuelta por que¿?¿?
-            return ((char *)s1);
+        if (ft_strchr(s2, *s1)) //si esta funcion retorna algo entra
+            return ((char *)s1); //y retorna el resto de la funcion
         s1++;
     }
-    return (NULL);
+    return (NULL); //y si no retorna nulo
 }
 
 int main()
 {
     char tweet[] = "tripouillete hola buenas tardes";
-    char tweet_aux[] = "lhoa";
+    char tweet_aux[] = "we";
     char tweet1[] = "tripouillete hola buenas tardes";
-    char tweet1_aux[] = "lhoa";
+    char tweet1_aux[] = "we";
 
     printf("%s\n", strpbrk(tweet, tweet_aux));
     printf("%s\n", ft_strpbrk(tweet1, tweet1_aux));

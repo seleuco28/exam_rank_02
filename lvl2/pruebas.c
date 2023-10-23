@@ -1,148 +1,55 @@
-/*Assignment name  : flood_fill
-Expected files   : *.c, *.h
-Allowed functions: -
---------------------------------------------------------------------------------
+/*Assignment name	: ft_strpbrk
+Expected files	: ft_strpbrk.c
+Allowed functions: None
+---------------------------------------------------------------
 
-Write a function that takes a char ** as a 2-dimensional array of char, a
-t_point as the dimensions of this array and a t_point as the starting point.
+Reproduce exactly the behavior of the function strpbrk
+(man strpbrk).
 
-Starting from the given 'begin' t_point, this function fills an entire zone
-by replacing characters inside with the character 'F'. A zone is an group of
-the same character delimitated horizontally and vertically by other characters
-or the array boundry.
+The function should be prototyped as follows:
 
-The flood_fill function won't fill diagonally.
+char	*ft_strpbrk(const char *s1, const char *s2);*/
 
-The flood_fill function will be prototyped like this:
-  void  flood_fill(char **tab, t_point size, t_point begin);
-
-The t_point structure is prototyped like this:
-
-  typedef struct  s_point
-  {
-    int           x;
-    int           y;
-  }               t_point;
-
-Example:
-
-$> cat test.c
-#include <stdlib.h>
 #include <stdio.h>
-#include "flood_fill.h"
+#include <string.h>
 
-char** make_area(char** zone, t_point size)
+char *ft_strchr(const char *s, int c) // "locate a character in string"
 {
-	char** new;
+    int i;
 
-	new = malloc(sizeof(char*) * size.y);
-	for (int i = 0; i < size.y; ++i)
-	{
-		new[i] = malloc(size.x + 1);
-		for (int j = 0; j < size.x; ++j)
-			new[i][j] = zone[i][j];
-		new[i][size.x] = '\0';
-	}
-
-	return new;
+    i = 0;
+    if (!s)
+        return(0);
+    while (s[i])
+    {
+        if ((char)s[i] == (char)c)
+            return((char *)&s[i]); //retornamos el resto del string
+        i++;
+    }
+    if (c == '\0')
+        return((char *)&s[i]);
+    return (0);
 }
 
-int main(void)
+char	*ft_strpbrk(const char *s1, const char *s2)
 {
-	t_point size = {8, 5};
-	char *zone[] = {
-		"11111111",
-		"10001001",
-		"10010001",
-		"10110001",
-		"11100001",
-	};
-
-	char**  area = make_area(zone, size);
-	for (int i = 0; i < size.y; ++i)
-		printf("%s\n", area[i]);
-	printf("\n");
-
-	t_point begin = {7, 4};
-	flood_fill(area, size, begin);
-	for (int i = 0; i < size.y; ++i)
-		printf("%s\n", area[i]);
-	return (0);
+    while (*s1)
+    {
+        if (ft_strchr(s2, *s1))
+            return((char *)s1);
+        s1++;
+    }
+    return(NULL);   
 }
 
-$> gcc flood_fill.c test.c -o test; ./test
-11111111
-10001001
-10010001
-10110001
-11100001
-
-FFFFFFFF
-F000F00F
-F00F000F
-F0FF000F
-FFF0000F
-$>*/
-#include <stdlib.h>
-#include <stdio.h>
-#include "flood_fill.h"
-
-void fill(char **tab, t_point size, t_point begin, char to_fill)
+int main()
 {
-	if (begin.y < 0 || begin.y >= size.y || begin.x < 0 || begin.x >= size.x
-		|| tab[begin.y][begin.x] != to_fill)
-		return;
-	tab[begin.y][begin.x] = 'F';
-	fill(tab, size, (t_point){begin.x - 1, begin.y}, to_fill);
-	fill(tab, size, (t_point){begin.x + 1, begin.y}, to_fill);
-	fill(tab, size, (t_point){begin.x, begin.y - 1}, to_fill);
-	fill(tab, size, (t_point){begin.x, begin.y + 1}, to_fill);
+    char tweet[] = "tripouillete hola buenas tardes";
+    char tweet_aux[] = "we";
+    char tweet1[] = "tripouillete hola buenas tardes";
+    char tweet1_aux[] = "we";
 
-}
-void  flood_fill(char **tab, t_point size, t_point begin)
-{
-	fill(tab, size, begin, tab[begin.y][begn.x]);
-}
-
-#include <stdlib.h>
-#include <stdio.h>
-#include "flood_fill.h"
-
-char** make_area(char** zone, t_point size)
-{
-	char** new;
-
-	new = malloc(sizeof(char*) * size.y);
-	for (int i = 0; i < size.y; ++i)
-	{
-		new[i] = malloc(size.x + 1);
-		for (int j = 0; j < size.x; ++j)
-			new[i][j] = zone[i][j];
-		new[i][size.x] = '\0';
-	}
-
-	return new;
-}
-
-int main(void)
-{
-	t_point size = {8, 5};
-	char *zone[] = {
-		"11111111",
-		"10001001",
-		"10010001",
-		"10110001",
-		"11100001",
-	};
-
-	char**  area = make_area(zone, size);
-	for (int i = 0; i < size.y; ++i)
-		printf("%s\n", area[i]);
-	printf("\n");
-
-	t_point begin = {7, 4};
-	flood_fill(area, size, begin);
-	for (int i = 0; i < size.y; ++i)
-		printf("%s\n", area[i]);
-	return (0);
+    printf("%s\n", strpbrk(tweet, tweet_aux));
+    printf("%s\n", ft_strpbrk(tweet1, tweet1_aux));
+    return (0);
 }

@@ -19,31 +19,3 @@ $> ./print_hex "5156454" | cat -e
 $> ./print_hex | cat -e
 $*/
 
-#include <stdlib.h>
-#include <unistd.h>
-
-void print_hex(int i)
-{
-	char base[16] = "0123456789abcdef";
-	char c;
-	if (i >= 16)
-	{
-		c = base[i % 16];
-		i = i / 16;
-		print_hex(i);
-		write(1, &c, 1);
-	}		
-	else
-	{
-		c = base[i % 16];
-		write(1, &c, 1);
-	}
-}
-
-int main(int ac, char **av)
-{
-	if (ac == 2)
-		print_hex(atoi(av[1]));
-	write(1, "\n", 1);
-	return 0;
-}

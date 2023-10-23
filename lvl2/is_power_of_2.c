@@ -19,7 +19,7 @@ int	    is_power_of_2(unsigned int n);*/
 
 int is_power_of_2(unsigned int n)
 {
-	int number = 2; //cuidado porque si pongo aqui un 1 entra y nos da return 1 cuando queremos que sea return 0
+	int number = 2; //EMPEZARLO EN 2 para que 1 no de confusion
 	
 	while(number <= n)
 	{

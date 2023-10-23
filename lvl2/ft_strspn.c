@@ -17,7 +17,7 @@ size_t	ft_strspn(const char *s, const char *accept);*/
 #include <stdlib.h>
 
 
-char *ft_strchr(const char *s, int c)
+char *ft_strchr(const char *s, int c) // "locate a character in string"
 {
     int i;
 
@@ -27,7 +27,7 @@ char *ft_strchr(const char *s, int c)
     while (s[i])
     {
         if ((char)s[i] == (char)c)
-            return((char *)&s[i]);
+            return((char *)&s[i]); //retornamos el resto del string
         i++;
     }
     if (c == '\0')
@@ -42,24 +42,26 @@ int main()
     printf("%s\n", strchr(tweet, 'a'));
     printf("%s\n", ft_strchr(tweet, 'a'));
     return 0;
-}
-*/
-size_t ft_strspn(const char *s, const char *accept)
+}*/
+
+
+size_t ft_strspn(const char *s, const char *accept) //retorna el numero de veces que coinciden los chars en un string
 {
     size_t i = 0;
 
     while(s[i] != '\0')
     {
-        if (ft_strchr(accept, s[i]) == 0)
+        if (ft_strchr(accept, s[i]) == 0) //cuando ft_strchr no retorne nada, break
             break;
         ++i;
     }
     return (i);
 }
 
+//este main es un poco contrainuitivo, pero aun asi funciona
 int main () {
-    int len = strspn("tripoulliete hola buenas tardes", "buenas");
-    int len_ft = ft_strspn("tripoulliete hola buenas tardes","buenas");
+    int len = strspn("tripoulliete hola buenas tardes", "tripou");
+    int len_ft = ft_strspn("tripoulliete hola buenas tardes","tripou");
     printf("%d\n", len );
     printf("%d\n", len_ft );
 return(0);
