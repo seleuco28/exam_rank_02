@@ -20,7 +20,8 @@ int	    is_power_of_2(unsigned int n);*/
 int is_power_of_2(unsigned int n)
 {
 	int number = 2; //EMPEZARLO EN 2 para que 1 no de confusion
-	
+    if (n == 1) //IMPORTANTISIMA EXCEPCION!!! aunque no parezca 1 is power of 2!!!!
+        return(1);
 	while(number <= n)
 	{
 		if (number == n)

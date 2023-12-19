@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/alvarovelazquez/Desktop/exam_rank_02/lvl4",
-      "program": "/Users/alvarovelazquez/Desktop/exam_rank_02/lvl4/build/Debug/outDebug"
+      "cwd": "/Users/alvarovelazquez/Desktop/exam_rank_02/lvl3",
+      "program": "/Users/alvarovelazquez/Desktop/exam_rank_02/lvl3/build/Debug/outDebug"
     }
   ]
 }

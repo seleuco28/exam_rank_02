@@ -38,7 +38,7 @@ void epur_str(char *str)
     {
         if (str[i] == ' ' || str[i] == '\t')
             flag = 1;
-        if (!(str[i] == ' ' || str[i] == '\t')) //esto me da bien
+        if (!(str[i] == ' ' || str[i] == '\t')) //IMPORTATNE NO METER AQUI OTRO WHILE SINO UN IF!!!!
         //if (str[i] != ' ' || str[i] != '\t') //y esto, que es como lo suelo hacer yo, Y ME DA MAL
         {
             if (flag == 1)

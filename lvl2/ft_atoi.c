@@ -29,7 +29,7 @@ int ft_atoi(const char *str)
         signo = -1;
     if (*str == '-' || *str == '+')
         str++;
-    while (*str >= '0' && *str <= '9')
+    while (*str >= '0' && *str <= '9') //IMPORTANTE PONER QUE SEA NUMERO (no vale solo con decir 'que exista')
     {
         resultado = resultado * 10 + *str - '0'; //la primera es (0 * 10) = 0 + el mismo string
         str++;

@@ -21,40 +21,40 @@ int	ft_wordlen(char *str) //mido la len de una palabra
 	int i = 0;
 
 	while (str[i] != '\0' && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
-		++i;
+		i++;
 	return (i);
 }
 
-char	*word_dupe(char *str) // le hago malloc a la palabra y copio el string original
+char	*word_strdup(char *str) // le hago malloc a la palabra y copio el string original
 {
 	int i = 0;
 	int len = ft_wordlen(str);
 	char *word = malloc(sizeof(char) * (len + 1));
 	
-	word[len] = '\0';
+	
 	while (i < len)
 	{
 		word[i] = str[i];
-		++i;
+		i++;
 	}
+	word[len] = '\0';
 	return (word);
 }
 
 void	fill_words(char **array, char *str)
 {
 	int word_index = 0;
-	int i = 0;
-
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n') //me salto los primeros espacios
-		++i;
-	while (str[i])
+	
+	while (*str == ' ' || *str == '\t' || *str == '\n') //me salto los primeros espacios
+		str++;
+	while (*str != '\0')
 	{
-		array[word_index] = word_dupe(str);
-		++word_index;
-		while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
-			++i;
-		while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
-			++i;
+		array[word_index] = word_strdup(str); //meto la copya de la palabra, en el **array
+		word_index++;
+		while (*str != '\0' && *str != ' ' && *str != '\t' && *str != '\n') //me salto la palabra
+			str++;
+		while (*str == ' ' || *str == '\t' || *str == '\n') //me salto los espacios
+			str++;
 	}
 }
 
@@ -62,15 +62,15 @@ int		count_words(char *str)
 {
 	int num_words = 0;
 	
-	while (*str == ' ' || *str == '\t' || *str == '\n')
-		++str;
+	while (*str == ' ' || *str == '\t' || *str == '\n') //salto los espacios
+		str++;
 	while (*str != '\0')
 	{
-		++num_words;
-		while (*str != '\0' && *str != ' ' && *str != '\t' && *str != '\n')
-			++str;
-		while (*str == ' ' || *str == '\t' || *str == '\n')
-			++str;
+		num_words++; //cuento palabra
+		while (*str != '\0' && *str != ' ' && *str != '\t' && *str != '\n') //salto espacios
+			str++;
+		while (*str == ' ' || *str == '\t' || *str == '\n') //salto palabra
+			str++;
 	}
 	return (num_words);
 }
@@ -81,11 +81,11 @@ char	**ft_split(char *str)
 	char	**array;
 	
 	num_words = count_words(str);
-	array = malloc(sizeof(char *) * (num_words + 1));
+	array = malloc(sizeof(char *) * (num_words + 1)); //ATENCION AQUI, QUE ES MALLOC A CHAR*
 	
-	array[num_words] = 0;
-	fill_words(array, str);
-	return (array);
+	array[num_words] = 0; //asi paro el array
+	fill_words(array, str); //llena las palabras de cada cajon del array
+	return (array); //retorna puntero al array
 }
 
 int main(void)

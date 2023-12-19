@@ -32,14 +32,15 @@ $>*/
 void str_capitalizer(char *str)
 {
     int i = 0; //HAGO PRIMERO LA 1RA LETRA Y LGO LAS DEMAS
-    if (str[i] >= 'a' && str[i] <= 'z') //si meto esta dentro del while me da error
+    if (str[i] >= 'a' && str[i] <= 'z') 
         str[i] = str[i] - 32;
-    write(1, &str[i], 1);
+    write(1, &str[i], 1); //CUIDADO si meto el write y el i++ dentro del if, no me lo cuenta en el siguiente argumento!!
     i++;
     while (str[i])
     {
         if (str[i] >= 'A' && str[i] <= 'Z')
             str[i] = str[i] + 32;
+		//IMPORTANTISIMA LA CONDICIONDE ESTAR ENTRE 'A' Y 'Z'
         if ((str[i - 1] == ' ') && (str[i] >= 'a' && str[i] <= 'z'))//si la posicion x la anterior es espacio y entre letras, en mayuscula
             str[i] = str[i] - 32;
         write(1, &str[i], 1);

@@ -19,6 +19,8 @@ int max(int* tab, unsigned int len)
 
     i = 0;
     maximo = tab[i];
+    if (len == 0) //ATENCION: poner esto, sin ello en main con len = 0 da un numero
+        return 0;
     while (i < len) //IMPORTANTE que no sea igual, sino cuenta una mas!!!
     {
         if (maximo < tab[i])

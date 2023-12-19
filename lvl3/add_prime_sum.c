@@ -61,33 +61,31 @@ int ft_atoi(const char *str)
     return (signo * resultado);
 }
 
-int is_prime(int num)
+int is_prime(int n)
 {
-	int i = 1;
-
-	if ( num == 2)
-		return (1);
-	while (++i < num)
+	int i = 2;
+	if (n <= 1) //IMPORTANTE ESTO PARA CONTROLAR EL 0 Y EL 1
+		return 0;
+	while (i < n)
 	{
-		if (num % i == 0) //no seria primo
+		if (n % i == 0)
 			return (0);
+		i++;
 	}
 	return (1);
 }
 
-void	add_prime_sum(int n)
+void add_prime_sum(int n)
 {
-	int	i;
-	int	count;
-
-	count = 0;
-	if (n == 1)
-		count = 1;
-	i = 1;
-	while (++i <= n) //si no pongo el ++i aqui delante me da problemas
+	int i = 1;
+	int contador = 0; 
+	while (i <= n) //cambiado, para que cuando el argumento sea 1, de 0
+	{
 		if (is_prime(i))
-			count += i; //lo que habia mas 'i'
-	ft_putnbr(count);
+			contador += i;
+		i++;
+	}
+	ft_putnbr(contador);
 }
 
 int main(int ac, char **av)

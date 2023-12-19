@@ -41,28 +41,26 @@ int main()
 char	*ft_itoa(int nbr)
 {
 	int		count;
-	long	number;
 	char	*str;
 
-	number = nbr;
-	count = get_count(number);
+	count = get_count(nbr);
 	str = ((char *)malloc(count + 1)); //cuidado porque el malloc yo lo hacia diferente
 	if (!str)
 		return (NULL);
 	str[count--] = '\0'; //IMPORTANTISIMO ESTE --
-	if (number == 0)
+	if (nbr == 0)
 		str[0] = '0';
 	else
 	{
-		if (number < 0)
+		if (nbr < 0)
 		{
 			str[0] = '-';
-			number *= -1; //lo pongo en positivo y sigo con ello
+			nbr *= -1; //lo pongo en positivo y sigo con ello
 		}
-		while (number > 0)
+		while (nbr > 0)
 		{
-			str[count] = (number % 10) + '0'; //se puede poner el "--"" aqui
-			number /= 10;
+			str[count] = (nbr % 10) + '0'; //se puede poner el "--"" aqui
+			nbr /= 10;
 			count--;
 		}
 	}
@@ -80,6 +78,4 @@ int	main(void)
 	printf("%s\n", ft_itoa(-0));
 	printf("%s\n", ft_itoa(-2));
 	printf("%s\n", ft_itoa(-24));
-	printf("%s\n", ft_itoa(-2147483648));
-	printf("%s\n", ft_itoa(2147483647));
 }

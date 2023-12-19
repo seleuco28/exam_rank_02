@@ -55,7 +55,8 @@ char *ft_strpbrk(const char *s1, const char *s2)
         s1++;
     }
     return (NULL); //y si no retorna nulo
-}
+} 
+//IMPORTANTE, he probado a hacerlo con [i]s y me daba warnings, hacerlo asi
 
 int main()
 {

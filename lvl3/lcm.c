@@ -32,7 +32,7 @@ Your function must be prototyped as follows:
 unsigned int lcm(unsigned int a, unsigned int b)
 {
     unsigned int n;
-    if (a == 0 || b == 0) //cuidado con esto
+    if (a == 0 || b == 0) //IMPORTANTISIMO PONER ESTO, SINO PETA
         return (0);
     if (a > b)
         n = a;

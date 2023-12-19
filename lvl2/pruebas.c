@@ -1,55 +1,41 @@
-/*Assignment name	: ft_strpbrk
-Expected files	: ft_strpbrk.c
-Allowed functions: None
----------------------------------------------------------------
+/*Assignment name  : ft_strrev
+Expected files   : ft_strrev.c
+Allowed functions: 
+--------------------------------------------------------------------------------
 
-Reproduce exactly the behavior of the function strpbrk
-(man strpbrk).
+Write a function that reverses (in-place) a string.
 
-The function should be prototyped as follows:
+It must return its parameter.
 
-char	*ft_strpbrk(const char *s1, const char *s2);*/
+Your function must be declared as follows:
+
+char    *ft_strrev(char *str);*/
 
 #include <stdio.h>
-#include <string.h>
 
-char *ft_strchr(const char *s, int c) // "locate a character in string"
+char *ft_strrev(char *str)
 {
-    int i;
-
-    i = 0;
-    if (!s)
-        return(0);
-    while (s[i])
+    int i = 0;
+    int len = 0;
+    char temp;
+    while (str[len])
+        len++;
+    len--;
+    while (i <= len)
     {
-        if ((char)s[i] == (char)c)
-            return((char *)&s[i]); //retornamos el resto del string
+        temp = str[i];
+        str[i] = str[len];
+        str[len] = temp;
+        len--;
         i++;
     }
-    if (c == '\0')
-        return((char *)&s[i]);
-    return (0);
-}
-
-char	*ft_strpbrk(const char *s1, const char *s2)
-{
-    while (*s1)
-    {
-        if (ft_strchr(s2, *s1))
-            return((char *)s1);
-        s1++;
-    }
-    return(NULL);   
+    return(str);
 }
 
 int main()
 {
-    char tweet[] = "tripouillete hola buenas tardes";
-    char tweet_aux[] = "we";
-    char tweet1[] = "tripouillete hola buenas tardes";
-    char tweet1_aux[] = "we";
+    char string[] = "1234567";
+    printf("%s", ft_strrev(string));
 
-    printf("%s\n", strpbrk(tweet, tweet_aux));
-    printf("%s\n", ft_strpbrk(tweet1, tweet1_aux));
-    return (0);
+    return 0;
 }

@@ -1,21 +1,51 @@
-/*Assignment name  : print_hex
-Expected files   : print_hex.c
-Allowed functions: write
+/*Assignment name  : pgcd
+Expected files   : pgcd.c
+Allowed functions: printf, atoi, malloc, free
 --------------------------------------------------------------------------------
 
-Write a program that takes a positive (or zero) number expressed in base 10,
-and displays it in base 16 (lowercase letters) followed by a newline.
+Write a program that takes two strings representing two strictly positive
+integers that fit in an int.
 
-If the number of parameters is not 1, the program displays a newline.
+Display their highest common denominator followed by a newline (It's always a
+strictly positive integer).
+
+If the number of parameters is not 2, display a newline.
 
 Examples:
 
-$> ./print_hex "10" | cat -e
-a$
-$> ./print_hex "255" | cat -e
-ff$
-$> ./print_hex "5156454" | cat -e
-4eae66$
-$> ./print_hex | cat -e
+$> ./pgcd 42 10 | cat -e
+2$
+$> ./pgcd 42 12 | cat -e
+6$
+$> ./pgcd 14 77 | cat -e
+7$
+$> ./pgcd 17 3 | cat -e 
+1$
+$> ./pgcd | cat -e
 $*/
 
+#include <stdio.h>
+#include <stdlib.h>
+
+void pgcd(int y, int z)
+{
+	int i = 1;
+	int temp;
+
+	while (i <= y && i <= z)
+	{
+		if ((y % i == 0) && (z % i == 0))
+			temp = i;
+		i++;
+	}
+	printf("%d", temp);
+}
+
+
+int main(int ac, char **av)
+{
+	if (ac == 3)
+		pgcd(atoi(av[1]), atoi(av[2]));
+	printf("\n");
+	return 0;
+}

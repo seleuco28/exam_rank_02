@@ -42,7 +42,7 @@ void ft_putnbr(int i)
 
 int main(int ac, char **av)
 {
-	if (ac == 1)
+	if (ac == 1) //no haria falta, con el 'else' quedaria solucionado (creo)
 		write(1, "0", 1);
 	else
 		ft_putnbr(ac - 1);

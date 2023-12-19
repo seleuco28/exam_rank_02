@@ -31,7 +31,7 @@ int *ft_range(int start, int end)
         len = start - end;
     else
         len = end - start;
-    array = malloc(sizeof(int) * len + 1); //haria falta el +1? checkarlo, yo creo que en principio no
+    array = malloc(sizeof(int) * len + 1); //haria falta el +1? checkarlo, en principio SI
     if (array == NULL)
         return(NULL);
     while (len >= 0)

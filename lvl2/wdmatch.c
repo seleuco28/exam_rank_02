@@ -52,6 +52,15 @@ void wdmatch(char *str1, char *str2)
 			i++;
 		j++;
 	}
+    /*    if (!str1[i])
+    {
+        i = 0;
+        while (str1[i])
+        {
+            write(1, &str1[i], 1);
+            i++;
+        }
+    }*/ //metiendo el ft_putstr a mi manera, funciona
 	if (!str1[i]) //IMPORTANTE ESTO!!!
 		ft_putstr(str1);
 }
