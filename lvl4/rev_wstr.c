@@ -14,7 +14,7 @@ If the number of parameters is different from 1, the program will display
 
 In the parameters that are going to be tested, there won't be any "additional" 
 spaces (meaning that there won't be additionnal spaces at the beginning or at 
-the end of the string, and words will always be separated by exactly one space).
+the end of the string, and words will always  be separated by exactly one space).
 
 Examples:
 
@@ -43,8 +43,8 @@ void rev_wstr(char *str)
         while (str[i] == ' ' || str[i] == '\t' || str[i] == '\0') //importante este '\0' porque en el primer supuesto siempre sera asi
             i--;
         end = i;
-        //ATENCION!!!en esta linea de abajo he fallado mucho y por eso no me daba!!
-        while (str[i] && str[i] != ' ' && str[i] != '\t') //mientras palabra
+        //ATENCION!!!en esta linea de abajo he fallado mucho y por eso no me daba!! IMPORTANTISIMO EL "Y QUE EXISTA"
+        while (str[i] && str[i] != ' ' && str[i] != '\t') //mientras palabra IMPORTANTISIMO EL "Y QUE EXISTA"
             i--;
         start = i + 1; //importante este +1 para estar dentro de la 1ra letra
         int flag;
@@ -54,7 +54,7 @@ void rev_wstr(char *str)
             write(1, &str[start], 1);
             start++;
         }
-        if (flag != 0) //si flag no existe porque era igual a start y se ha acabado
+        if (flag != 0) //si flag no existe porque era igual a start y se ha acabado, al final: start = "-1 + 1 = 0" y no pintaria
             write(1, " ", 1);
     }       
 }

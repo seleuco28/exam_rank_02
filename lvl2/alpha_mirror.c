@@ -24,8 +24,8 @@ $>./alpha_mirror "My horse is Amazing." | cat -e
 Nb slihv rh Znzarmt.$
 $>./alpha_mirror | cat -e
 $
-$>
-*/
+$>*/
+
 #include <unistd.h>
 //mi alpha_mirror: FUNCIONANDO
 void alpha_mirror(char *str)

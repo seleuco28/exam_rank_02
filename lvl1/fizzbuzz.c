@@ -44,15 +44,14 @@ void ft_putnbr(int i)
 	int iauxiliar;
 	char numero;
 
-	iauxiliar = i;
+	iauxiliar = i; //cuidado, si lo pongo al reves (i = iauxiliar) me falla!!
 	if (i > 9)
 	{
 		iauxiliar = i % 10;
 		i = i / 10;
 		ft_putnbr(i);
-
 	}
-	numero = iauxiliar + 48;
+	numero = iauxiliar + '0';
 	write(1, &numero, 1);
 }
 

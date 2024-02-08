@@ -24,6 +24,37 @@ $> ./last_word "  lorem,ipsum  " | cat -e
 lorem,ipsum$
 $>*/
 
+
+//Hecho por mi, comprobado que funciona
+#include <unistd.h>
+
+void last_word(char *str)
+{
+    int i = 0;
+    while (str[i])
+        i++;
+    i--;
+    while (str[i] == ' ' || str[i] == '\t') //quitamos los espacios finales
+        i--;
+    while (str[i] && (!(str[i] == ' ' || str[i] == '\t'))) //si existe y no espacio = palabra (importante ese y existe)
+        i--;
+    i++; //Importante este +1 para volver a entrar en la palabra
+    while (str[i] && (!(str[i] == ' ' || str[i] == '\t'))) //mientras EXISTE Y  palabra escribe
+    {
+        write(1, &str[i], 1);
+        i++;
+    }
+}
+
+int main(int ac, char **av)
+{
+    if (ac == 2)
+        last_word(av[1]);
+    write(1, "\n", 1);
+    return(0);
+}
+
+/*
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -61,7 +92,7 @@ int main(int ac, char **av)
 		last_word(av[1]);
 	write(1, "\n", 1);
 	return (0);
-}
+}*/
 
 /*
 // ATENCION, HECHO POR MI Y FUNCIONA, PERO HAY QUE TENER EN CUENTA MUCHO LOS LENS!!

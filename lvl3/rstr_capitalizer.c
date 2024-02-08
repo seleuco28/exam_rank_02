@@ -26,33 +26,43 @@ $>*/
 
 #include <unistd.h>
 
-//el mio funcinando, muy parecido al de abajo, solo que no contorlo los \t, cuiado ahi en el examen
+//a mi manera, checkeado y funcionando
 void rstr_capitalizer(char *str)
 {
-    int i = 0;
-    while (str[i])
-    {
-        if (str[i] >= 'A' && str[i] <= 'Z')
-            str[i] = str[i] + 32;
-        if ((str[i + 1] == ' ' || str[i + 1] == '\0') && (str[i] >= 'a' && str[i] <= 'z'))
-            str[i] = str[i] - 32;
-        write(1, &str[i], 1);
-        i++;
-    }
-
+	int i = 0;
+	while (str[i])
+	{
+		if (str[i] >= 'A' && str[i] <= 'Z')
+			str[i] += 32;
+		i++;
+	}
+	i = 0;
+	while (str[i])
+	{
+		if ((str[i + 1] == '\0' || str[i + 1] == '\t' || str[i + 1] == ' ') && (str[i] >= 'a' && str[i] <= 'z'))
+			str[i] -= 32;
+		write(1, &str[i], 1);
+		i++;
+	}
 }
 
 int main(int ac, char **av)
 {
-    int i = 1; //importante inicializar el i a 1 para no printar el "a.out"
+	int i = 1;
 
-    while (i < ac)
-    {
-        rstr_capitalizer(av[i]);
-        i++;
-    }
-    write(1, "\n", 1);
-    return 0;
+	if (ac > 1)
+	{
+		while (i <= (ac - 1))
+		{
+			rstr_capitalizer(av[i]);
+			write(1, "\n", 1);
+			i++;
+		}
+	}
+	else
+		write(1, "\n", 1);
+
+	return 0;
 }
 
 

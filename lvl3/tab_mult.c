@@ -98,12 +98,13 @@ int main(int ac, char **av)
     int i;
     int nbr;
 
-    if (ac != 2)
+
+    if (ac != 2) //esto podría ser 'if ac < 1'??
         write(1, "\n", 1);
     else
     {
-        i = 1;
-        nbr = ft_atoi(av[1]);
+        nbr = ft_atoi(av[1]); //si saco estas variables fuera del else, me da segfault sin parametros
+        i = 1; //este si lo puedo dejar fuera del else
         while (i <= 9)
         {
             ft_putnbr(i);

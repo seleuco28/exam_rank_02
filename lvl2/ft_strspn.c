@@ -26,7 +26,7 @@ char *ft_strchr(const char *s, int c) // "locate a character in string"
         return(0);
     while (s[i])
     {
-        if ((char)s[i] == (char)c)
+        if ((char)s[i] == (char)c) //no hace falta castear el s[i] verdad¿?¿ en ft_strpbrk no lo hago y me funciona
             return((char *)&s[i]); //retornamos el resto del string
         i++;
     }
@@ -49,7 +49,7 @@ size_t ft_strspn(const char *s, const char *accept) //retorna el numero de veces
 {
     size_t i = 0;
 
-    while(s[i] != '\0')
+    while(s[i])
     {
         if (ft_strchr(accept, s[i]) == 0) //cuando ft_strchr no retorne nada, break
             break;
@@ -58,7 +58,6 @@ size_t ft_strspn(const char *s, const char *accept) //retorna el numero de veces
     return (i);
 }
 
-//este main es un poco contrainuitivo, pero aun asi funciona
 int main () {
     int len = strspn("tripoulliete hola buenas tardes", "tripou");
     int len_ft = ft_strspn("tripoulliete hola buenas tardes","tripou");

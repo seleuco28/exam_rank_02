@@ -1,3 +1,4 @@
+
   typedef struct  s_point
   {
     int           x;

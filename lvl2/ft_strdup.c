@@ -14,25 +14,25 @@ char    *ft_strdup(char *src);*/
 #include <stdlib.h>
 #include <string.h>
 
-char *ft_strdup(const char *s1)
+char *ft_strdup(const char *src)
 {
-    char *str;
+    char *dst;
     int i;
 
     i = 0;
-    while (s1[i])
+    while (src[i])
         i++;
-    str = malloc(sizeof(char) * (i + 1));
-    if (!str)
+    dst = malloc(sizeof(char) * (i + 1));
+    if (!dst) // Importante este fallo del malloc
         return (0);
     i = 0;
-    while (s1[i])
-    {
-        str[i] = s1[i];
+    while (src[i]) //si pongo en el while dst, me da fallo poner siempre src!!!
+    {               //algo en lo que he fallado la ultima vez, es en no hacer este while que es la copia!!!!
+        dst[i] = src[i];
         i++;
     }
-    str[i] = '\0'; //importante este cero al final!!!
-    return (str);
+    dst[i] = '\0'; //importante este cero al final!!!
+    return (dst);
 }
 
 int main()

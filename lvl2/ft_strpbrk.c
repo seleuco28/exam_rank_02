@@ -15,20 +15,20 @@ char	*ft_strpbrk(const char *s1, const char *s2);*/
 #include <stdlib.h>
 #include <string.h>
 
-char *ft_strchr(const char *s, int c)
+char *ft_strchr(const char *s, int c) //locate a character in a string
 {
-    int i;
+    int i = 0;
 
-    i = 0;
-    if (!s)
-        return (0);
+    //if (!s)
+    //    return (0);
     while (s[i])
     {
         if ((char)c == s[i])
             return((char *)&s[i]); // para retornar el puntero al string en cierta posicion
         i++;
     }
-    if (c == '\0') // The terminating null character is considered to be part of the
+    if (c == '\0') // IMPORTANTE: if "c" no if "s[i]" 
+                // The terminating null character is considered to be part of the
                    //string; therefore if c is `\0', the functions locate the terminating `\0'.
         return((char *)&s[i]); //hasta el final
     return (0);
@@ -46,7 +46,7 @@ int main(void)
 }*/
 
 //en el momento en que coincida algo del s2 en s1, return a todo eso
-char *ft_strpbrk(const char *s1, const char *s2)
+char *ft_strpbrk(const char *s1, const char *s2) // locate multiple characters in string
 {
     while (*s1)
     {

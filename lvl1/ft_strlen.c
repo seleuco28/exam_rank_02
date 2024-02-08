@@ -9,24 +9,18 @@ Your function must be declared as follows:
 
 int	ft_strlen(char *str);*/
 
-#include <unistd.h>
 #include <stdio.h>
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-	int i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return(i);
+    int i = 0;
+    while (str[i])
+        i++;
+    return(i);
 }
 
-int main(void)
+int main()
 {
-	char str[9] = "abcdefgh";
-
-	printf("%d\n", ft_strlen(str));
-
-	return(0);
+    printf("%d\n", ft_strlen("holaa"));
+    return 0;
 }

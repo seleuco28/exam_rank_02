@@ -19,10 +19,10 @@ Input is always coherent.*/
 //a mi manera, funciona, igual que abajo pero comentado
 void sort_int_tab(int *tab, unsigned int size)
 {
-	int i = 0; //hay que inicializar a 0, obvio
+	int i = 0;
 	int temp;
 
-	while (i < (size - 1)) //y poner un size - 1 para que no pete el while //NO SE SI HAY QUE PONER EL SIZE -1 O NO
+	while (i < (size - 1)) // IMPORTANTE METER EL SIZE -1, si no peta
 	{
 		if (tab[i] > tab[i + 1]) //haces el swap Y VUELVES A EMPEZAR, IMPORTANTE
 		{
@@ -31,7 +31,7 @@ void sort_int_tab(int *tab, unsigned int size)
 			tab[i + 1] = temp;
 			i = 0;
 		}
-		else //si no pongo este else me da mal!!! ATENCION!!!!!S
+		else //ESTE 'else' siempre se me olvida y si no no sale!!!!!!!!!!!
 			i++;
 	}
 }

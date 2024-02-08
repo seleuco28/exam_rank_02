@@ -26,6 +26,53 @@ Deuxieme Test Un Peu Moins  Facile$
 Aller Un Dernier 0123456789pour La Route    E $
 $>*/
 
+
+//A MI MANERA , FUNCIONANDO Y TESTS PASADOS
+#include <unistd.h>
+
+void str_capitalizer(char *str)
+{
+	int i = 0;
+	while (str[i])
+	{
+		if (str[i] >= 'A' && str[i] <= 'Z')
+			str[i] += 32;
+		i++;
+	}
+	i = 0; //aqui todo en minusculas
+	if (str[i] >= 'a' && str[i] <= 'z') //si la primera es letra, escribemela en mayusculas
+	{
+		str[i] -= 32;
+		write(1, &str[i], 1);
+		i++;
+	}
+	while (str[i])
+	{
+		if ((str[i] >= 'a' && str[i] <= 'z') && (str[i - 1] == ' ' || str[i - 1] == '\t')) //si letra y anterior espacio O tab (IMPORTANTE)
+			str[i] -= 32;
+		write(1, &str[i], 1);
+		i++;
+	}
+}
+
+int main(int ac, char **av)
+{
+	int i = 1;
+	if (ac > 1)
+	{
+		while (i <= (ac - 1)) //chequear esto que aqui esta lo tricky del asunto
+		{
+			str_capitalizer(av[i]); //importante esto
+			write(1, "\n", 1);
+			i++;
+		}
+	}
+	else
+		write(1, "\n", 1);
+	return 0;
+}
+
+/*
 #include <unistd.h>
 
 //capitalizer a mi manera, FUNCINANDO
@@ -41,7 +88,7 @@ void str_capitalizer(char *str)
         if (str[i] >= 'A' && str[i] <= 'Z')
             str[i] = str[i] + 32;
 		//IMPORTANTISIMA LA CONDICIONDE ESTAR ENTRE 'A' Y 'Z'
-        if ((str[i - 1] == ' ') && (str[i] >= 'a' && str[i] <= 'z'))//si la posicion x la anterior es espacio y entre letras, en mayuscula
+        if ((str[i - 1] == ' ' || str[i - 1] == '\t') && (str[i] >= 'a' && str[i] <= 'z'))//si anterior espacio O tab(importante) y letra la actual, mayuscula
             str[i] = str[i] - 32;
         write(1, &str[i], 1);
         i++;
@@ -49,7 +96,7 @@ void str_capitalizer(char *str)
 }
 
 
-int main(int ac, char **av)
+int main(int ac, char **av) //CUIDADO ESTE MAIN ES COMPLICADO
 {
     int i = 1;
     if (ac == 1)
@@ -61,41 +108,5 @@ int main(int ac, char **av)
         i++;
     }
     return 0;
-}
-
-/*
-void	str_capitalizer(char *str)
-{
-	int i = 0;
-
-	if (str[i] >= 'a' && str[i] <= 'z') //aqui hacemos solo la primera
-		str[i] -= 32;
-	write(1, &str[i], 1);
-	while (str[++i]) //aui hacemos el resto con una logica de str[i - 1]
-	{
-		if (str[i] >= 'A' && str[i] <= 'Z')
-			str[i] += 32;
-		if ((str[i] >= 'a' && str[i] <= 'z') && (str[i - 1] == ' ' || str[i - 1] == '\t'))
-			str[i] -= 32;
-		write(1, &str[i], 1);
-	}
-}
-
-int main(int argc, char *argv[])
-{
-	int i;
-
-	if (argc == 1)
-		write(1, "\n", 1);
-	else
-	{
-		i = 1;
-		while (i < argc)
-		{
-			str_capitalizer(argv[i]);
-			write(1, "\n", 1);
-			i++;
-		}
-	}
-	return (0);
 }*/
+

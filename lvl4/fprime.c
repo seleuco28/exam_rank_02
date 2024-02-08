@@ -33,24 +33,22 @@ $> ./fprime 42 21 | cat -e
 $*/
 
 #include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
 
 void fprime(int n)
 {
-	if (n == 1)
-		printf("1");
 	int i = 2;
+	if (n == 1) //importante esta excepcion (te la dan los ejemplos)
+		printf("1");
 	while (i <= n)
 	{
-		if(n % i == 0)
+		if (n % i == 0) //si es primo
 		{
-			printf("%d", i);
-			if (n != i) //importante esto para no poner un '*' despues del ultimo numero
+			printf("%d", i); //imprimes numero
+			if (n != i)    //imprimes '*' menos en el último
 				printf("*");
-			//ATENCION, si cambias estos dos de abajo de orden, se vas a un bucle infinito!!!
-			n /= i; // n = n/i;
-			i--; // tiras una vez atras porque se puede repetir el numero varias veces
+			n /= i;         //divides el numero 
+			i--;          // retrocedes uno para poder volver a imprimir el mismo número de nuevo 
 		}
 		i++;
 	}
@@ -61,5 +59,5 @@ int main(int ac, char **av)
 	if (ac == 2)
 		fprime(atoi(av[1]));
 	printf("\n");
-	return (0);
+	return 0;
 }

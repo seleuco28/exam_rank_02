@@ -14,6 +14,7 @@ int	ft_atoi(const char *str);*/
 
 #include <unistd.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int ft_atoi(const char *str)
 {
@@ -27,11 +28,11 @@ int ft_atoi(const char *str)
         str++;
     if (*str == '-')
         signo = -1;
-    if (*str == '-' || *str == '+')
-        str++;
+    if (*str == '-' || *str == '+') //para que sea exactamente igual que atoi, esto tiene que se un if y hasta ahora yo lo ponia como while
+        str++;                      // la correción al examen lo da bien con while tambien, pero por si aca ponerlo con if
     while (*str >= '0' && *str <= '9') //IMPORTANTE PONER QUE SEA NUMERO (no vale solo con decir 'que exista')
     {
-        resultado = resultado * 10 + *str - '0'; //la primera es (0 * 10) = 0 + el mismo string
+        resultado = resultado * 10 + *str - '0';
         str++;
     }
     return (signo * resultado);
@@ -40,10 +41,8 @@ int ft_atoi(const char *str)
 
 int main()
 {
-    char *str;
-    str = "-123";
-
-    printf("%d\n", ft_atoi(str));
+    printf("%d\n", atoi("                       -+123"));
+    printf("%d\n", ft_atoi("                       -+123"));
     return 0;
 }
 /*

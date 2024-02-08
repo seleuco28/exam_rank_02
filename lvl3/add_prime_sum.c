@@ -22,78 +22,79 @@ $>./add_prime_sum | cat -e
 $>*/
 
 #include <unistd.h>
+#include <stdio.h>
+
 
 void ft_putnbr(int i)
 {
-    int iauxiliar;
-    char numero;
+	int iauxiliar;
+	char numero;
 
-    iauxiliar = i;
-    if (i > 9)
-    {
-        iauxiliar = i % 10;
-        i = i / 10;
-        ft_putnbr(i);
-    }
-    numero = iauxiliar + 48;
-    write(1, &numero, 1);
+	iauxiliar = i;
+	if (i > 9)
+	{
+		iauxiliar = i % 10;
+		i /= 10;
+		ft_putnbr(i);
+	}
+	numero = iauxiliar + '0';
+	write(1, &numero, 1);
 }
 
 int ft_atoi(const char *str)
 {
-    int signo;
-    int resultado;
-
-    signo = 1;
-    resultado = 0;
-
-    while (*str == 32 || (*str >= 9 && *str <= 13))
-        str++;
-    if (*str == '-')
-        signo = -1;
-    if (*str == '-' || *str == '+')
-        str++;
-    while (*str >= '0' && *str <= '9')
-    {
-        resultado = resultado * 10 + *str - '0';
-        str++;
-    }
-    return (signo * resultado);
+	int signo;
+	int resultado;
+	signo = 1;
+	resultado = 0;
+	while (*str == ' ' || *str == '\t')
+		str++;
+	if (*str == '-')
+		signo = -1;
+	if (*str == '+' || *str == '-')
+		str++;
+	while (*str >= '0' && *str <= '9')
+	{
+		resultado = resultado * 10 + (*str - '0');
+		str++;
+	}
+	return (signo * resultado);
 }
 
 int is_prime(int n)
 {
 	int i = 2;
-	if (n <= 1) //IMPORTANTE ESTO PARA CONTROLAR EL 0 Y EL 1
-		return 0;
-	while (i < n)
+	if (n < 2) //IMPORTANTE ESTO
+		return (0);
+	while (i < n) //esto no puede ser igual que...
 	{
 		if (n % i == 0)
-			return (0);
+			return 0;
 		i++;
 	}
-	return (1);
+	return 1;
 }
 
 void add_prime_sum(int n)
 {
-	int i = 1;
-	int contador = 0; 
-	while (i <= n) //cambiado, para que cuando el argumento sea 1, de 0
+	int i = 2;
+	int numerin = 0;
+	while (i <= n)
 	{
 		if (is_prime(i))
-			contador += i;
+			numerin += i;
 		i++;
 	}
-	ft_putnbr(contador);
+	ft_putnbr(numerin);
+
 }
 
 int main(int ac, char **av)
 {
-	if (ac == 2)
-        add_prime_sum(ft_atoi(av[1]));
-	else
+	if ((ac != 2) || (ft_atoi(av[1]) < 0)) //argumentos diferentes a 1 Y argumentos no positivos IMPORANTE LO DICE EL ENUNCIADO!!!
 		write(1, "0", 1);
+	else
+		add_prime_sum(ft_atoi(av[1]));
 	write(1, "\n", 1);
-	return (0);
+	return 0;
 }

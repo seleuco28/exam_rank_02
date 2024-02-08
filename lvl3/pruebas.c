@@ -1,51 +1,83 @@
-/*Assignment name  : pgcd
-Expected files   : pgcd.c
-Allowed functions: printf, atoi, malloc, free
+/*Assignment name  : ft_list_size
+Expected files   : ft_list_size.c, ft_list.h
+Allowed functions: 
 --------------------------------------------------------------------------------
 
-Write a program that takes two strings representing two strictly positive
-integers that fit in an int.
+Write a function that returns the number of elements in the linked list that's
+passed to it.
 
-Display their highest common denominator followed by a newline (It's always a
-strictly positive integer).
+It must be declared as follows:
 
-If the number of parameters is not 2, display a newline.
+int	ft_list_size(t_list *begin_list);
 
-Examples:
+You must use the following structure, and turn it in as a file called
+ft_list.h:
 
-$> ./pgcd 42 10 | cat -e
-2$
-$> ./pgcd 42 12 | cat -e
-6$
-$> ./pgcd 14 77 | cat -e
-7$
-$> ./pgcd 17 3 | cat -e 
-1$
-$> ./pgcd | cat -e
-$*/
+typedef struct    s_list
+{
+    struct s_list *next;
+    void          *data;
+}                 t_list;*/
 
+#include "ft_list.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-void pgcd(int y, int z)
+int	ft_list_size(t_list *begin_list)
 {
-	int i = 1;
-	int temp;
-
-	while (i <= y && i <= z)
+	int i = 0;
+	while (begin_list)
 	{
-		if ((y % i == 0) && (z % i == 0))
-			temp = i;
+		begin_list = begin_list->next;
 		i++;
 	}
-	printf("%d", temp);
+	return (i);
 }
 
 
-int main(int ac, char **av)
-{
-	if (ac == 3)
-		pgcd(atoi(av[1]), atoi(av[2]));
-	printf("\n");
-	return 0;
+int main()
+{	
+	int a = 5;
+	int b = 7;
+	int c = 2;
+	int d = 4;
+    int e = 5;
+    int f = 6;
+
+	int *w;
+	int *x;
+	int *y;
+	int *z;
+    int *zz;
+    int *zzz;
+
+	w = &a;
+	x = &b;
+	y = &c;
+	z = &d;
+    zz = &e;
+    zzz = &f;
+	t_list *list1;
+	t_list *list2;
+	t_list *list3;
+	t_list *list4;
+    t_list *list5;
+    t_list *list6;
+	list1 = malloc(sizeof(t_list));
+	list2 = malloc(sizeof(t_list));
+	list3 = malloc(sizeof(t_list));
+	list4 = malloc(sizeof(t_list));
+    list5 = malloc(sizeof(t_list));
+    list6 = malloc(sizeof(t_list));
+	list1->data = (void *)w;
+	list2->data = (void *)x;
+	list3->data = (void *)y;
+	list4->data = (void *)z;
+	list1->next = list2;
+	list2->next = list3;
+	list3->next = list4;
+	list4->next = list5;
+    list5->next = list6;
+    list6->next = NULL;
+	printf("%d", ft_list_size(list1));
 }

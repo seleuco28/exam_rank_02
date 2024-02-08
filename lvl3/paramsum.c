@@ -32,7 +32,7 @@ void ft_putnbr(int i)
 
 	if (i > 9)
 	{
-		iauxiliar = i % 0;
+		iauxiliar = i % 10;
 		i = i / 10;
 		ft_putnbr(i);
 	}
@@ -42,35 +42,7 @@ void ft_putnbr(int i)
 
 int main(int ac, char **av)
 {
-	if (ac == 1) //no haria falta, con el 'else' quedaria solucionado (creo)
-		write(1, "0", 1);
-	else
-		ft_putnbr(ac - 1);
+	ft_putnbr(ac - 1);
 	write(1, "\n", 1);
 	return 0;
 }
-
-/*
-void get_num(int num)
-{
-	char c;
-	
-	if (num > 9)
-	{
-		c = num % 10 + '0';
-		num = num / 10;
-		get_num(num);
-		write(1, &c, 1);
-	}
-	else
-	{
-		c = num + '0';
-		write(1, &c, 1);
-	}
-}
-
-int main(int ac, char **av)
-{
-	get_num(ac - 1);
-	write(1, "\n", 1);
-}*/

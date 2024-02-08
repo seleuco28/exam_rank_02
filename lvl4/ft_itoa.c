@@ -11,71 +11,53 @@ Your function must be declared as follows:
 char	*ft_itoa(int nbr);*/
 
 #include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
 
-int get_count(long n)
+int get_count(int nbr)
 {
-    int i = 0;
-    if (n == 0)
-        return(1);
-    if (n < 0)
-    {
-        //n = n * -1; //esto esta puesto pero en principio no haria falta
-        i++;
-    }
-    while (n)
-    {
-        n = n / 10;
-        i++;
-    }
-    return (i);
+	int i = 0;
+	if (nbr <= 0) //importante este igual para que cuanto nbr sea 0 cuente 1!!!
+		i++;
+	while (nbr)
+	{
+		nbr /= 10;
+		i++;
+	}
+	return (i);
 }
-/*
-int main()
-{
-    printf("%d", get_count(-4884));
-    return (0);
-}*/
 
-char	*ft_itoa(int nbr)
+char *ft_itoa(int nbr)
 {
-	int		count;
-	char	*str;
+	char *str;
+	int count = get_count(nbr);
 
-	count = get_count(nbr);
-	str = ((char *)malloc(count + 1)); //cuidado porque el malloc yo lo hacia diferente
+	str = malloc(sizeof(char) * count); //no necesitaria el +1
 	if (!str)
 		return (NULL);
-	str[count--] = '\0'; //IMPORTANTISIMO ESTE --
-	if (nbr == 0)
+	str[count--] = '\0'; //pongo fin al string // ATENCION, SI NO CORRO UNO ATRAS EL COUNT, EL PROGRAMA SE QUEDA PILLADO
+	if (nbr == 0) //controlo la excepcion del 0
 		str[0] = '0';
 	else
 	{
 		if (nbr < 0)
 		{
-			str[0] = '-';
-			nbr *= -1; //lo pongo en positivo y sigo con ello
+			str[0] = '-'; //le pongo el negativo
+			nbr *= -1;    //y vuelvo el numero positivo (para hacer el caso general)
 		}
-		while (nbr > 0)
+		while (nbr)
 		{
-			str[count] = (nbr % 10) + '0'; //se puede poner el "--"" aqui
+			str[count] = (nbr % 10) + '0';
 			nbr /= 10;
 			count--;
 		}
 	}
-	return (str);
+	return(str);
 }
 
-
-
-int	main(void)
+int main()
 {
+	printf("%s\n", ft_itoa(-123));
 	printf("%s\n", ft_itoa(0));
-	printf("%s\n", ft_itoa(1));
-	printf("%s\n", ft_itoa(42));
-	printf("%s\n", ft_itoa(1001));
-	printf("%s\n", ft_itoa(-0));
-	printf("%s\n", ft_itoa(-2));
-	printf("%s\n", ft_itoa(-24));
+	printf("%s\n", ft_itoa(123));
+	return 0;
 }

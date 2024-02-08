@@ -27,9 +27,79 @@ $>
 $>./repeat_alpha "" | cat -e
 $
 $>*/
-#include <stdio.h>
-#include <unistd.h>
 
+#include <unistd.h>
+//última manera en la que lo he hecho FUNCIONA
+void repeat_alpha(char *str)
+{
+    int i = 0;
+    int contador;
+    while (str[i])
+    {
+        if (str[i] >= 'a' && str[i] <= 'z')
+            contador = str[i] - 'a' + 1;
+        else if (str[i] >= 'A' && str[i] <= 'Z')
+            contador = str[i] - 'A' + 1;
+        else 
+            contador = 1;
+        while (contador >= 1)
+        {
+            write(1, &str[i], 1);
+            contador--;
+        }
+        i++;
+    }
+}
+
+int main(int ac, char **av)
+{
+    if (ac == 2)
+        repeat_alpha(av[1]);
+    write(1, "\n", 1);
+    return 0;
+}
+
+/*
+//OTRA MANERA, funcionando
+void repeat_alpha(char *str)
+{
+    int i = 0;
+    int contador;
+    while (str[i])
+    {
+        if (str[i] >= 'a' && str[i] <= 'z')
+        {
+            contador = str[i] - 'a';
+            while (contador >= 0)
+            {
+                write(1, &str[i], 1);
+                contador--;
+            }
+        }
+        else if (str[i] >= 'A' && str[i] <= 'Z')
+        {
+            contador = str[i] - 'A';
+            while (contador >= 0)
+            {
+                write(1, &str[i], 1);
+                contador--;
+            }
+        }
+        else
+            write(1, &str[i], 1);
+        i++;
+    }
+}
+
+int main(int ac, char **av)
+{
+    if (ac == 2)
+        repeat_alpha(av[1]);
+    write(1, "\n", 1);
+    return 0;
+}*/
+
+/*
 //a mi manera y funciona guay
 int contador_letras(char c)
 {
@@ -63,7 +133,7 @@ int main(int ac, char **av)
         repeat_alpha(av[1]);
     write(1, "\n", 1);
     return 0;
-}
+}*/
 
 
 /* 	CON UN CONTADOR int i

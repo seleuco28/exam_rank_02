@@ -27,19 +27,17 @@ $>./search_and_replace "wNcOre Un ExEmPle Pas Facilw a Ecrirw " "w" "e" | cat -e
 eNcOre Un ExEmPle Pas Facile a Ecrire $*/
 
 #include <unistd.h>
-
-//a mi manera y sale bien
+// todo cambiado, a mi manera, FUNCIONA
 void search_and_replace(char *str, char *se, char *re)
 {
     int i = 0;
-    if (!se[1] && !re[1])
+    if (!se[1] || !re[1]) // no poner "&" es "||" !!!!!
     {
         while (str[i])
-        {   
-            if (str[i] == *se)
-                write(1, re, 1);
-            else
-                write(1, &str[i], 1);
+        {
+            if (str[i] == se[0])
+                str[i] = re[0];
+            write(1, &str[i], 1);
             i++;
         }
     }
@@ -52,29 +50,3 @@ int main(int ac, char **av)
     write(1, "\n", 1);
     return 0;
 }
-
-/*
-void search_and_replace(char *str, char *key, char *re)
-{
-	if (!key[1] && !re[1])	//esto es para el 2ndo ejemplo, cuando key y re tienen mas de un value (son string en vez de char), SI NO EXISTENEN EN LA POSICION 1
-	{
-		while(*str)
-		{
-			if(*str == *key)
-			{
-				write (1, re, 1);
-			}
-			else
-				write (1, str, 1);
-			str++;
-		}
-	}
-}
-
-int main(int ac, char **av)
-{
-	if (ac == 4)
-		search_and_replace(av[1], av[2], av[3]);
-	write(1, "\n", 1);
-	return 0;
-}*/

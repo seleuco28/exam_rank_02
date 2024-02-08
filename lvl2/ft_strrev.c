@@ -24,7 +24,7 @@ char *ft_strrev(char *str)
 	while (str[len])
 		len++;
 	len--; //siempre nos vamos uno en len;
-	while (i < len) //creo que da igual poner el igual o no aqui...
+	while (i < len) //posible fallo, aqui antes he puesto "while (str[i])" y no me lo hacia CUIDADO
 	{
 		temp = str[i];
 		str[i] = str[len];

@@ -15,6 +15,35 @@ int	    is_power_of_2(unsigned int n);*/
 #include <unistd.h>
 #include <stdio.h>
 
+int is_power_of_2(unsigned int n)
+{
+    int i = 1;
+    //if (n == 1) ESTO NO TIENE QUE PONERSE, DA FAILURE, se considera que 1 es power of 2!!! comprobado
+    //    return (0);
+    while(i <= n) 
+    {
+        if (i == n)
+            return(1);
+        i *= 2;
+    }
+    return(0);
+}
+
+int main()
+{
+
+    printf("%d\n", is_power_of_2(0));
+    printf("%d\n", is_power_of_2(1));
+    printf("%d\n", is_power_of_2(2));
+    printf("%d\n", is_power_of_2(3));
+    printf("%d\n", is_power_of_2(4));
+    printf("%d\n", is_power_of_2(5));
+    printf("%d\n", is_power_of_2(8));
+
+    return 0;
+}
+
+/*
 //esta es la unica manera de hacerlo
 
 int is_power_of_2(unsigned int n)
@@ -33,12 +62,16 @@ int is_power_of_2(unsigned int n)
 	return 0;
 }
 
-
 int main()
 {
-    printf("%d\n" ,  is_power_of_2(64));
-    printf("%d\n" ,  is_power_of_2(24));
-    printf("%d\n" ,  is_power_of_2(48));
+
+    printf("%d\n", is_power_of_2(0));
+    printf("%d\n", is_power_of_2(1));
+    printf("%d\n", is_power_of_2(2));
+    printf("%d\n", is_power_of_2(3));
+    printf("%d\n", is_power_of_2(4));
+    printf("%d\n", is_power_of_2(5));
+    printf("%d\n", is_power_of_2(8));
 
     return 0;
-}
+}*/

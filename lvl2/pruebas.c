@@ -1,41 +1,60 @@
-/*Assignment name  : ft_strrev
-Expected files   : ft_strrev.c
-Allowed functions: 
+/*
+Assignment name  : wdmatch
+Expected files   : wdmatch.c
+Allowed functions: write
 --------------------------------------------------------------------------------
 
-Write a function that reverses (in-place) a string.
+Write a program that takes two strings and checks whether it's possible to
+write the first string with characters from the second string, while respecting
+the order in which these characters appear in the second string.
 
-It must return its parameter.
+If it's possible, the program displays the string, followed by a \n, otherwise
+it simply displays a \n.
 
-Your function must be declared as follows:
+If the number of arguments is not 2, the program displays a \n.
 
-char    *ft_strrev(char *str);*/
+Examples:
 
-#include <stdio.h>
+$>./wdmatch "faya" "fgvvfdxcacpolhyghbreda" | cat -e
+faya$
+$>./wdmatch "faya" "fgvvfdxcacpolhyghbred" | cat -e
+$
+$>./wdmatch "quarante deux" "qfqfsudf arzgsayns tsregfdgs sjytdekuoixq " | cat -e
+quarante deux$
+$>./wdmatch "error" rrerrrfiiljdfxjyuifrrvcoojh | cat -e
+$
+$>./wdmatch | cat -e
+$*/
 
-char *ft_strrev(char *str)
+#include <unistd.h>
+
+void wdmatch(char *str1, char *str2)
 {
     int i = 0;
-    int len = 0;
-    char temp;
-    while (str[len])
-        len++;
-    len--;
-    while (i <= len)
+    int j = 0;
+
+    while (str2[j])
     {
-        temp = str[i];
-        str[i] = str[len];
-        str[len] = temp;
-        len--;
-        i++;
+        if (str2[j] == str1[i])
+            i++;
+        j++;
     }
-    return(str);
+
+    if (!str1[i])
+    {
+        i = 0;
+        while (str1[i])
+        {
+            write(1, &str1[i], 1);
+            i++;
+        }
+    }
 }
 
-int main()
+int main(int ac, char **av)
 {
-    char string[] = "1234567";
-    printf("%s", ft_strrev(string));
-
+    if (ac == 3)
+        wdmatch(av[1], av[2]);
+    write(1, "\n", 1);
     return 0;
 }

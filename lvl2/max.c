@@ -19,7 +19,7 @@ int max(int* tab, unsigned int len)
 
     i = 0;
     maximo = tab[i];
-    if (len == 0) //ATENCION: poner esto, sin ello en main con len = 0 da un numero
+    if (len == 0) //ATENCION: poner esto, sin ello en main con len = 0 da un numero Y PARA CUMPLIR "If the array is empty, the function returns 0."
         return 0;
     while (i < len) //IMPORTANTE que no sea igual, sino cuenta una mas!!!
     {
@@ -31,9 +31,10 @@ int max(int* tab, unsigned int len)
 
 }
 
+
 int main()
 {
-    int i[6] = {1000, 2, 403, 24, 345, 23};
+    int i[6] = {-1000, 2, 403, 24, 345, 23};
 
     printf("%d\n", max(i , 6));
 }
