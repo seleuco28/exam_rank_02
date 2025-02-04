@@ -29,6 +29,7 @@ $*/
 void inter(char *str1, char *str2)
 {
     int i;
+    //poner estas llaves
     int ascii[256] = {0}; //hacemos una tabla ascii y la rellenamos de ceros
 
     i = 0;

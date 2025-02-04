@@ -63,22 +63,22 @@ int ft_atoi(const char *str)
 
 int is_prime(int n)
 {
-	int i = 2;
-	if (n < 2) //IMPORTANTE ESTO
+	int i = 2;//CUIDADO -> HAY QUE INICIALIZARLO EN 2
+	if (n < 2) //Y CONTROLAR LOS CASOS EN N<2 Y -> para controlar esto: or the argument is not a positive number
 		return (0);
-	while (i < n) //esto no puede ser igual que...
+	while (i < n) //esto no puede ser igual que... //si no hay ningun número por debajo que su resto sea 0 ->es primo
 	{
 		if (n % i == 0)
-			return 0;
+			return 0; //si algun numero menor a el, lo divide con resto 0 NO es primo
 		i++;
 	}
-	return 1;
+	return 1; //se activa (es primo)
 }
 
 void add_prime_sum(int n)
 {
 	int i = 2;
-	int numerin = 0;
+	int numerin = 0; //IMPORTANTE INICIALIZAR ESTO
 	while (i <= n)
 	{
 		if (is_prime(i))
@@ -91,10 +91,10 @@ void add_prime_sum(int n)
 
 int main(int ac, char **av)
 {
-	if ((ac != 2) || (ft_atoi(av[1]) < 0)) //argumentos diferentes a 1 Y argumentos no positivos IMPORANTE LO DICE EL ENUNCIADO!!!
-		write(1, "0", 1);
-	else
+	if (ac == 2)
 		add_prime_sum(ft_atoi(av[1]));
+	else //IMPORTANTE, TE DICE EL ENUNCIADO QUE ESCRIBA 0 SI HAY MAS DE UN ARGUMENTO
+		write(1, "0", 1);
 	write(1, "\n", 1);
 	return 0;
 }

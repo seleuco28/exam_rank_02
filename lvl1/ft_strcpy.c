@@ -27,12 +27,12 @@ char    *ft_strcpy(char *s1, char *s2)
 
 int main()
 {
-    char s1[] = "9876543210";
+    char s1[] = "9876543210"; //para her un char puntero no se puede poner: *s1 = "9876543210"
     char s2[] = "123456";
     char s11[] = "9876543210";
     char s22[] = "123456";
 
     printf("%s\n", strcpy(s1, s2));
-    printf("%s\n", ft_strcpy(s11, s22));
+    printf("%s\n", ft_strcpy(s11, s22)); //da abort y problemas si hay oberlap de s2 en s1
     return 0;
 }

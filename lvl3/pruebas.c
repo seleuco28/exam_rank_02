@@ -1,83 +1,48 @@
-/*Assignment name  : ft_list_size
-Expected files   : ft_list_size.c, ft_list.h
-Allowed functions: 
+/*Assignment name  : paramsum
+Expected files   : paramsum.c
+Allowed functions: write
 --------------------------------------------------------------------------------
 
-Write a function that returns the number of elements in the linked list that's
-passed to it.
+Write a program that displays the number of arguments passed to it, followed by
+a newline.
 
-It must be declared as follows:
+If there are no arguments, just display a 0 followed by a newline.
 
-int	ft_list_size(t_list *begin_list);
+Example:
 
-You must use the following structure, and turn it in as a file called
-ft_list.h:
+$>./paramsum 1 2 3 5 7 24
+6
+$>./paramsum 6 12 24 | cat -e
+3$
+$>./paramsum | cat -e
+0$
+$>*/
 
-typedef struct    s_list
+#include <unistd.h>
+
+void ft_putnbr(int i)
 {
-    struct s_list *next;
-    void          *data;
-}                 t_list;*/
+	char numero;
+	int iauxiliar;
 
-#include "ft_list.h"
-#include <stdio.h>
-#include <stdlib.h>
+	iauxiliar = i;
 
-int	ft_list_size(t_list *begin_list)
-{
-	int i = 0;
-	while (begin_list)
+	if (i > 9)
 	{
-		begin_list = begin_list->next;
-		i++;
+		iauxiliar = i % 10;
+		i = i / 10;
+		ft_putnbr(i);
 	}
-	return (i);
+	numero = iauxiliar + '0';
+	write(1, &numero, 1);
 }
 
-
-int main()
-{	
-	int a = 5;
-	int b = 7;
-	int c = 2;
-	int d = 4;
-    int e = 5;
-    int f = 6;
-
-	int *w;
-	int *x;
-	int *y;
-	int *z;
-    int *zz;
-    int *zzz;
-
-	w = &a;
-	x = &b;
-	y = &c;
-	z = &d;
-    zz = &e;
-    zzz = &f;
-	t_list *list1;
-	t_list *list2;
-	t_list *list3;
-	t_list *list4;
-    t_list *list5;
-    t_list *list6;
-	list1 = malloc(sizeof(t_list));
-	list2 = malloc(sizeof(t_list));
-	list3 = malloc(sizeof(t_list));
-	list4 = malloc(sizeof(t_list));
-    list5 = malloc(sizeof(t_list));
-    list6 = malloc(sizeof(t_list));
-	list1->data = (void *)w;
-	list2->data = (void *)x;
-	list3->data = (void *)y;
-	list4->data = (void *)z;
-	list1->next = list2;
-	list2->next = list3;
-	list3->next = list4;
-	list4->next = list5;
-    list5->next = list6;
-    list6->next = NULL;
-	printf("%d", ft_list_size(list1));
+int main(int ac, char **av)
+{
+    if (ac < 1)
+        write(1, "0\n", 2);
+    else
+        ft_putnbr(ac - 1);
+        write(1, "\n", 1);
+    return 0;
 }

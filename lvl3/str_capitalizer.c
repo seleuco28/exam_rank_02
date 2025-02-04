@@ -27,9 +27,49 @@ Aller Un Dernier 0123456789pour La Route    E $
 $>*/
 
 
-//A MI MANERA , FUNCIONANDO Y TESTS PASADOS
-#include <unistd.h>
 
+#include <unistd.h>
+//ultima manera de hacerlo y me ha funcionado bien //abajo hay una parecida
+
+void str_capitalizer(char *str)
+{
+	int i = 0;
+	while (str[i]) //todo a minusculas
+	{
+		if (str[i] >= 'A' && str[i] <= 'Z')
+			str[i] += 32;
+		i++;
+	}
+	i = 0;
+	while (str[i])
+	{
+		if (str[0] >= 'a' && str[0] <= 'z') //si primer char letra -= 32
+			str[0] -= 32;
+		if ((str[i - 1] == ' ' || str[i - 1] == '\t') && (str[i] >= 'a' && str[i] <= 'z'))//si anterior espacio y esta letra -= 32
+			str[i] -= 32;
+		write(1, &str[i], 1);
+		i++;
+	}
+}
+
+int main(int ac, char **av)
+{
+	int i = 1;
+	if (ac == 1)
+		write(1, "\n", 1);
+	else
+	{
+		while (i <= (ac - 1)) //importante este -1
+		{
+			str_capitalizer(av[i]);
+			write(1, "\n", 1);
+			i++;
+		}
+	}
+	return (0);
+}
+
+/*
 void str_capitalizer(char *str)
 {
 	int i = 0;
@@ -70,43 +110,4 @@ int main(int ac, char **av)
 	else
 		write(1, "\n", 1);
 	return 0;
-}
-
-/*
-#include <unistd.h>
-
-//capitalizer a mi manera, FUNCINANDO
-void str_capitalizer(char *str)
-{
-    int i = 0; //HAGO PRIMERO LA 1RA LETRA Y LGO LAS DEMAS
-    if (str[i] >= 'a' && str[i] <= 'z') 
-        str[i] = str[i] - 32;
-    write(1, &str[i], 1); //CUIDADO si meto el write y el i++ dentro del if, no me lo cuenta en el siguiente argumento!!
-    i++;
-    while (str[i])
-    {
-        if (str[i] >= 'A' && str[i] <= 'Z')
-            str[i] = str[i] + 32;
-		//IMPORTANTISIMA LA CONDICIONDE ESTAR ENTRE 'A' Y 'Z'
-        if ((str[i - 1] == ' ' || str[i - 1] == '\t') && (str[i] >= 'a' && str[i] <= 'z'))//si anterior espacio O tab(importante) y letra la actual, mayuscula
-            str[i] = str[i] - 32;
-        write(1, &str[i], 1);
-        i++;
-    }
-}
-
-
-int main(int ac, char **av) //CUIDADO ESTE MAIN ES COMPLICADO
-{
-    int i = 1;
-    if (ac == 1)
-        write(1, "\n", 1);
-    while (i <= (ac - 1))
-    {
-        str_capitalizer(av[i]);
-        write(1, "\n", 1);
-        i++;
-    }
-    return 0;
 }*/
-

@@ -45,9 +45,13 @@ void fprime(int n)
 		if (n % i == 0) //si es primo
 		{
 			printf("%d", i); //imprimes numero
-			if (n != i)    //imprimes '*' menos en el último
+			if (n != i)    //imprimes '*' -> menos en el último
 				printf("*");
 			n /= i;         //divides el numero 
+			/* //a mi me ha salido asi también (es lo mismo)
+			if (n != 1) //pero cuidado que sea distino de 1 (no de 0)
+				printf("*");
+			*/
 			i--;          // retrocedes uno para poder volver a imprimir el mismo número de nuevo 
 		}
 		i++;

@@ -47,7 +47,7 @@ void hidenp(char *str1, char *str2)
 	else if (!str1[i])
 		write(1, "1", 1);
 }
-
+//Also, the empty string is hidden in any string. QUE HAGO CON ESTO¿?
 int main(int ac, char **av)
 {
 	if (ac == 3)

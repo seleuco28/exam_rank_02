@@ -34,17 +34,18 @@ void last_word(char *str)
     while (str[i])
         i++;
     i--;
-    while (str[i] == ' ' || str[i] == '\t') //quitamos los espacios finales
+    while (str[i] == ' ' || str[i] == '\t') //ultimos espacios
         i--;
-    while (str[i] && (!(str[i] == ' ' || str[i] == '\t'))) //si existe y no espacio = palabra (importante ese y existe)
+    while (str[i] && (!(str[i] == ' ' || str[i] == '\t'))) //ultima palabra
         i--;
-    i++; //Importante este +1 para volver a entrar en la palabra
-    while (str[i] && (!(str[i] == ' ' || str[i] == '\t'))) //mientras EXISTE Y  palabra escribe
+    i++; //IMPORTANTE este +1 para volver a entrar en la palabra
+    //HE FALLADO EN EL "Y QUE EXISTA" ponerselo a todo y pista
+	while (str[i] && (!(str[i] == ' ' || str[i] == '\t'))) //mientras EXISTE Y  palabra escribe
     {
         write(1, &str[i], 1);
         i++;
     }
-}
+} // IMPORTANTE, HAY QUE PONER: Y QUE EXISTA EN LOS DOS WHILES SI NO DA FALLO
 
 int main(int ac, char **av)
 {

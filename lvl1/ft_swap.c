@@ -14,7 +14,7 @@ void	ft_swap(int *a, int *b);*/
 
 void	ft_swap(int *a, int *b)
 {
-    int temp;
+    int temp; //la variable que creo no es puntero (int normal)
 
     temp = *a;
     *a = *b;
@@ -27,7 +27,7 @@ int main()
     int b = 43;	//cuidado aqui que no es (*b)
 
     printf("a: %d, b: %d\n", a, b);
-    ft_swap(&a, &b);
+    ft_swap(&a, &b); //cuidado aqui porque no es (*a , *b)
     printf("a: %d, b: %d\n", a, b);
 
     return 0;

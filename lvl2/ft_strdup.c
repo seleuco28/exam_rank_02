@@ -19,7 +19,7 @@ char *ft_strdup(const char *src)
     char *dst;
     int i;
 
-    i = 0;
+    i = 0; //IMPORTANTISIMO INICIALIZARLO, si no me da segfault
     while (src[i])
         i++;
     dst = malloc(sizeof(char) * (i + 1));

@@ -1,148 +1,63 @@
-/*Assignment name  : flood_fill
-Expected files   : *.c, *.h
-Allowed functions: -
+/*Assignment name  : fprime
+Expected files   : fprime.c
+Allowed functions: printf, atoi
 --------------------------------------------------------------------------------
 
-Write a function that takes a char ** as a 2-dimensional array of char, a
-t_point as the dimensions of this array and a t_point as the starting point.
+Write a program that takes a positive int and displays its prime factors on the
+standard output, followed by a newline.
 
-Starting from the given 'begin' t_point, this function fills an entire zone
-by replacing characters inside with the character 'F'. A zone is an group of
-the same character delimitated horizontally and vertically by other characters
-or the array boundry.
+Factors must be displayed in ascending order and separated by '*', so that
+the expression in the output gives the right result.
 
-The flood_fill function won't fill diagonally.
+If the number of parameters is not 1, simply display a newline.
 
-The flood_fill function will be prototyped like this:
-  void  flood_fill(char **tab, t_point size, t_point begin);
+The input, when there's one, will be valid.
 
-The t_point structure is prototyped like this:
+Examples:
 
-  typedef struct  s_point
-  {
-    int           x;
-    int           y;
-  }               t_point;
+$> ./fprime 225225 | cat -e
+3*3*5*5*7*11*13$
+$> ./fprime 8333325 | cat -e
+3*3*5*5*7*11*13*37$
+$> ./fprime 9539 | cat -e
+9539$
+$> ./fprime 804577 | cat -e
+804577$
+$> ./fprime 42 | cat -e
+2*3*7$
+$> ./fprime 1 | cat -e
+1$
+$> ./fprime | cat -e
+$
+$> ./fprime 42 21 | cat -e
+$*/
 
-Example:
-
-$> cat test.c
-#include <stdlib.h>
-#include <stdio.h>
-#include "flood_fill.h"
-
-char** make_area(char** zone, t_point size)
-{
-	char** new;
-
-	new = malloc(sizeof(char*) * size.y);
-	for (int i = 0; i < size.y; ++i)
-	{
-		new[i] = malloc(size.x + 1);
-		for (int j = 0; j < size.x; ++j)
-			new[i][j] = zone[i][j];
-		new[i][size.x] = '\0';
-	}
-
-	return new;
-}
-
-int main(void)
-{
-	t_point size = {8, 5};
-	char *zone[] = {
-		"11111111",
-		"10001001",
-		"10010001",
-		"10110001",
-		"11100001",
-	};
-
-	char**  area = make_area(zone, size);
-	for (int i = 0; i < size.y; ++i)
-		printf("%s\n", area[i]);
-	printf("\n");
-
-	t_point begin = {7, 4};
-	flood_fill(area, size, begin);
-	for (int i = 0; i < size.y; ++i)
-		printf("%s\n", area[i]);
-	return (0);
-}
-
-$> gcc flood_fill.c test.c -o test; ./test
-11111111
-10001001
-10010001
-10110001
-11100001
-
-FFFFFFFF
-F000F00F
-F00F000F
-F0FF000F
-FFF0000F
-$>*/
-
-#include "flood_fill.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-void fill (char **tab, t_point size, t_point begin, char to_fill)
+void fprime(int n)
 {
-	if (begin.y < 0 || begin.y >= size.y || begin.x < 0 || begin.x >= size.x
-		|| tab[begin.y][begin.x] != to_fill)
-		return;
-	tab[begin.y][begin.x] = 'F';
-	fill(tab, size, (t_point){begin.x - 1, begin.y}, to_fill);
-	fill(tab, size, (t_point){begin.x + 1, begin.y}, to_fill);
-	fill(tab, size, (t_point){begin.x, begin.y - 1}, to_fill);
-	fill(tab, size, (t_point){begin.x, begin.y + 1}, to_fill);
-}
-
-void  flood_fill(char **tab, t_point size, t_point begin)
-{
-	fill(tab, size, begin, tab[begin.y][begin.x]);
-}
-
-
-
-
-char** make_area(char** zone, t_point size)
-{
-	char** new;
-
-	new = malloc(sizeof(char*) * size.y);
-	for (int i = 0; i < size.y; ++i)
+	int i = 2;
+	if (n == 1)
+		printf("1");
+	while (i <= n)
 	{
-		new[i] = malloc(size.x + 1);
-		for (int j = 0; j < size.x; ++j)
-			new[i][j] = zone[i][j];
-		new[i][size.x] = '\0';
+		if (n % i == 0)
+		{
+			printf("%d", i);
+			if (n != i)
+				printf("*");
+			n /= i;
+			i--;
+		}
+		i++;
 	}
-
-	return new;
 }
 
-int main(void)
+int main(int ac, char **av)
 {
-	t_point size = {8, 5};
-	char *zone[] = {
-		"11111111",
-		"10001001",
-		"10010001",
-		"10110001",
-		"11100001",
-	};
-
-	char**  area = make_area(zone, size);
-	for (int i = 0; i < size.y; ++i)
-		printf("%s\n", area[i]);
+	if (ac == 2)
+		fprime(atoi(av[1]));
 	printf("\n");
-
-	t_point begin = {7, 4};
-	flood_fill(area, size, begin);
-	for (int i = 0; i < size.y; ++i)
-		printf("%s\n", area[i]);
-	return (0);
+	return 0;
 }

@@ -40,10 +40,10 @@ void wdmatch(char *str1, char *str2)
             i++;
         j++;
     }
-    //no poner aqui el i = 0 porque no printa nada
+    //no poner aqui el i = 0 porque no printa nada HE FALLADO EN ESTO
     if (!str1[i])
     {
-        i = 0;
+        i = 0; // IMPORTANTE  poner el i = 0; aquí dentro
         while (str1[i])
         {
             write(1, &str1[i], 1);

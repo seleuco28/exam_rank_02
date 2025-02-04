@@ -1,4 +1,3 @@
-
 /*
 Assignment name  : ft_putstr
 Expected files   : ft_putstr.c
@@ -18,8 +17,7 @@ void	ft_putstr(char *str);*/
 
 void ft_putstr(char *str)
 {
-    int i;
-    i = 0;
+    int i = 0;
 
     while(str[i])
     {

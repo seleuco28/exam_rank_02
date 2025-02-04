@@ -18,36 +18,30 @@ int	ft_atoi(const char *str);*/
 
 int ft_atoi(const char *str)
 {
-    int signo;
-    int resultado;
+	int signo = 1; //IMPORTANTE INICIALIZAR LAS DOS VARIABLES
+	int resultado = 0; //IMPORTANTE INICIALIZAR LAS DOS VARIABLES
 
-    signo = 1;
-    resultado = 0; //se puede no inicializar¿?¿ NOOOO DA PROBLEMAS, PONERLOA 0 SIEMPRE
+	while (*str == ' ' || *str == '\t')
+		str++;
+	if (*str == '-')
+	{
+		signo = -1;
+		str++; //esto es necesario? (creo que no)
+	}
+	while (*str == '+' || *str == '-')
+		str++;
+	while (*str >= '0' && *str <= '9') //IMPORTANTE PONER QUE ESTE EN ESTE RANGO (no que exista)
+	{
+		resultado = resultado * 10 + (*str - '0');
+		str++;
+	}
 
-    while (*str == 32 || (*str >= 9 && *str <= 13))
-        str++;
-    if (*str == '-')
-        signo = -1;
-    if (*str == '-' || *str == '+') //para que sea exactamente igual que atoi, esto tiene que se un if y hasta ahora yo lo ponia como while
-        str++;                      // la correción al examen lo da bien con while tambien, pero por si aca ponerlo con if
-    while (*str >= '0' && *str <= '9') //IMPORTANTE PONER QUE SEA NUMERO (no vale solo con decir 'que exista')
-    {
-        resultado = resultado * 10 + *str - '0';
-        str++;
-    }
-    return (signo * resultado);
+	return(signo * resultado); //NO OLVIDAR EL RETURN ESTE
 }
-
 
 int main()
 {
-    printf("%d\n", atoi("                       -+123"));
-    printf("%d\n", ft_atoi("                       -+123"));
+    printf("%d\n", atoi("		-123")); //no da lo mismo si ponemos un mas (pero el corrector lo pone bien)
+    printf("%d\n", ft_atoi("		-123"));//no da lo mismo si ponemos un mas (pero el corrector lo pone bien)
     return 0;
 }
-/*
-int		main(void)//
-{
-	char a[] = "    \n\n\v\f\r\t -5234AAAgreghrsth";
-	printf("%d\n",ft_atoi(a));
-}*/

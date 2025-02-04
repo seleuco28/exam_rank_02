@@ -15,8 +15,7 @@ int    ft_strcmp(char *s1, char *s2);*/
 
 int ft_strcmp(char *s1, char *s2)
 {
-    int i;
-    i = 0;
+    int i = 0;
     
     while (s1[i]) //valdria con poner "while (s2[i])"?? == El simulador me dice que si, pero cuidado que puede ser posible fallo
     {

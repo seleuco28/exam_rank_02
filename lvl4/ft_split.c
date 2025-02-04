@@ -16,6 +16,23 @@ char    **ft_split(char *str);*/
 #include <stdlib.h>
 #include <stdio.h>
 
+int		count_words(char *str) //me retorna el numero de palabras que tiene el string
+{
+	int num_words = 0;
+	
+	while (*str == ' ' || *str == '\t' || *str == '\n') //salto los espacios
+		str++;
+	while (*str != '\0')
+	{
+		num_words++; //cuento palabra
+		while (*str != '\0' && *str != ' ' && *str != '\t' && *str != '\n') //salto espacios
+			str++;
+		while (*str == ' ' || *str == '\t' || *str == '\n') //salto palabra
+			str++;
+	}
+	return (num_words);
+}
+
 int	ft_wordlen(char *str) //mido la len de una palabra
 {
 	int i = 0;
@@ -25,7 +42,7 @@ int	ft_wordlen(char *str) //mido la len de una palabra
 	return (i);
 }
 
-char	*word_strdup(char *str) // le hago malloc a la palabra y copio el string original
+char	*word_strdup(char *str) // le hago malloc a la palabra y copio el string original (strdup)
 {
 	int i = 0;
 	int len = ft_wordlen(str);
@@ -41,7 +58,7 @@ char	*word_strdup(char *str) // le hago malloc a la palabra y copio el string or
 	return (word);
 }
 
-void	fill_words(char **array, char *str)
+void	fill_words(char **array, char *str) //meto en un 'cajon' la palabra, y me la salto
 {
 	int word_index = 0;
 	
@@ -49,30 +66,13 @@ void	fill_words(char **array, char *str)
 		str++;
 	while (*str != '\0')
 	{
-		array[word_index] = word_strdup(str); //meto la copya de la palabra, en el **array
+		array[word_index] = word_strdup(str); //meto la copia de la palabra, en el **array
 		word_index++;
 		while (*str != '\0' && *str != ' ' && *str != '\t' && *str != '\n') //me salto la palabra
 			str++;
 		while (*str == ' ' || *str == '\t' || *str == '\n') //me salto los espacios
 			str++;
 	}
-}
-
-int		count_words(char *str)
-{
-	int num_words = 0;
-	
-	while (*str == ' ' || *str == '\t' || *str == '\n') //salto los espacios
-		str++;
-	while (*str != '\0')
-	{
-		num_words++; //cuento palabra
-		while (*str != '\0' && *str != ' ' && *str != '\t' && *str != '\n') //salto espacios
-			str++;
-		while (*str == ' ' || *str == '\t' || *str == '\n') //salto palabra
-			str++;
-	}
-	return (num_words);
 }
 
 char	**ft_split(char *str)

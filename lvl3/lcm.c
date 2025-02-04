@@ -31,18 +31,18 @@ Your function must be prototyped as follows:
 
 unsigned int lcm(unsigned int a, unsigned int b)
 {
-    unsigned int n;
+    unsigned int i;
     if (a == 0 || b == 0) //IMPORTANTISIMO PONER ESTO, SINO PETA
         return (0);
     if (a > b)
-        n = a;
+        i = a;
     else
-        n = b;
+        i = b;
     while(1)
     {
-        if (n % a == 0 && n % b == 0)
-            return (n);
-        n++;
+        if (i % a == 0 && i % b == 0)
+            return (i);
+        i++;
     }
 }
 

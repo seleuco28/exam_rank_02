@@ -3,7 +3,8 @@
     "stdio.h": "c",
     "unistd.h": "c",
     "string.h": "c",
-    "ft_list.h": "c"
+    "ft_list.h": "c",
+    "sstream": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "clang",
   "C_Cpp_Runner.cppCompilerPath": "clang++",

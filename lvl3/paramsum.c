@@ -40,9 +40,14 @@ void ft_putnbr(int i)
 	write(1, &numero, 1);
 }
 
-int main(int ac, char **av)
+int main(int ac, char **av) //main corregido para que si no hay argumentos saque un; "0\n"
 {
-	ft_putnbr(ac - 1);
-	write(1, "\n", 1);
+	if (ac > 1)
+	{
+		ft_putnbr(ac - 1);
+		write(1, "\n", 1);
+	}
+	else
+		write(1, "0\n", 2);
 	return 0;
 }

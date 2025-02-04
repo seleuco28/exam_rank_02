@@ -14,11 +14,9 @@ If the array is empty, the function returns 0.
 
 int max(int* tab, unsigned int len)
 {
-    int i;
-    int maximo;
+    int i = 0;
+    int maximo = tab[i];
 
-    i = 0;
-    maximo = tab[i];
     if (len == 0) //ATENCION: poner esto, sin ello en main con len = 0 da un numero Y PARA CUMPLIR "If the array is empty, the function returns 0."
         return 0;
     while (i < len) //IMPORTANTE que no sea igual, sino cuenta una mas!!!

@@ -22,35 +22,40 @@ $*/
 #include <stdio.h>
 #include <unistd.h>
 
-int atoi_simple(char *s)
+int atoi_simple(char *str)
 {
-	int resultado = 0; // IMPORTANTE NO OLVIDAR EL IGUALAR ESTO, sino fallo por todos lados
-
-	while (*s)
+	int resultado = 0; // importante no inicializarlo como char
+	int signo = 1;
+	while (*str == '-' || *str == '\t')
+		str++;
+	if (*str == '-')
+		signo = -1;
+	while (*str == '-' || *str == '+')
+		str++;
+	while (*str >= '0' && *str <= '9')
 	{
-		resultado = resultado * 10 + *s - '0';
-		s++;
+		resultado = resultado * 10 + *str - '0';
+		str++;
 	}
-	return (resultado);
+	return (signo * resultado);
 }
 
-void print_hex(int i)
+//es una especie de ft_putnbr pero en hexadecimal
+void print_hex(int i) //FALLO-CUIDADO, al meter el atoi, de parámetro meto int i
 {
 	char base[16] = "0123456789abcdef";
-
-	char numero;
+	char numero; // he fallado antes inicializandolo como int CUIDADO!!
+	
 	if (i >= 16) //ojo aqui que si no pones el igual el num 16 te da mal!!
 	{
-		numero = base[i % 16];
+		numero = base[i % 16]; // lo correspondiente al resto, de la base
 		i = i / 16;
-		print_hex(i);
-		write(1, &numero, 1); //EL WRITE SIEMPRE LO ULTIMO!!	
+		print_hex(i);	
 	}
-	else 
-	{
+	else
 		numero = base[i % 16];
-		write(1, &numero, 1);
-	}
+
+	write(1, &numero, 1); //pongo el write abajo de los dos
 }
 
 

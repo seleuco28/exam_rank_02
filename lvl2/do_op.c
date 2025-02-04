@@ -45,6 +45,6 @@ int main (int ac, char **av)
         else if (av[2][0] == '%')
             printf("%d", (atoi(av[1]) % atoi(av[3]))); 
     }
-    printf("\n"); //aqui tengo que poner printf, porque si pongo write me escribe el "\n" antes
+    printf("\n"); //no puedo poner write, porque me hace primero el espacio y luego la operación
     return 0;
 }

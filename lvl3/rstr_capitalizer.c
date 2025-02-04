@@ -30,7 +30,7 @@ $>*/
 void rstr_capitalizer(char *str)
 {
 	int i = 0;
-	while (str[i])
+	while (str[i]) //todo a minusculas
 	{
 		if (str[i] >= 'A' && str[i] <= 'Z')
 			str[i] += 32;
@@ -39,7 +39,8 @@ void rstr_capitalizer(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if ((str[i + 1] == '\0' || str[i + 1] == '\t' || str[i + 1] == ' ') && (str[i] >= 'a' && str[i] <= 'z'))
+		//si la siguiente es \0 o " " o "\t" y la actual letra, hazla mayus
+		if ((str[i + 1] == '\0' || str[i + 1] == '\t' || str[i + 1] == ' ') && (str[i] >= 'a' && str[i] <= 'z')) 
 			str[i] -= 32;
 		write(1, &str[i], 1);
 		i++;
@@ -52,14 +53,14 @@ int main(int ac, char **av)
 
 	if (ac > 1)
 	{
-		while (i <= (ac - 1))
+		while (i <= (ac - 1)) //si no pongo este -1 me lo hace bien y despues me tira segfault
 		{
 			rstr_capitalizer(av[i]);
 			write(1, "\n", 1);
 			i++;
 		}
 	}
-	else
+	else //CUIDADO ponerlo como en str_capitalizer¿?
 		write(1, "\n", 1);
 
 	return 0;

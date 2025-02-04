@@ -22,28 +22,27 @@ Examples:
 #include <stdlib.h>
 #include <stdio.h>
 
-int *ft_range(int start, int end)
+int     *ft_range(int start, int end)
 {
-    int *array;
     int len;
-
-    if (end < start)
-        len = start - end;
-    else
+    int *array;
+    if (start < end)
         len = end - start;
-    array = malloc(sizeof(int) * len + 1); // SI HACE FALTA EL +1 XRKE EL LEN SE QUEDA UNO CORTO
-    if (array == NULL)
-        return(NULL);
-    while (len >= 0)
+    else
+        len = start - end;
+    
+    array = malloc(sizeof(int) * len + 1); // +1 importantisimo
+
+    while (len >= 0) // igualarlo a 0 importante
     {
-        array[len] = end; //señalo el final
-        if (start > end) // y si es descendente, vas sumando uno al array desde atras
-            end ++;
-        else //si es ascendente, al reves, vas restando desde atras
-            end --;
-        len --;
+        array[len] = end; //marcamos el final
+        if (start < end)
+            end--;
+        else
+            end++;
+        len--;
     }
-    return (array);
+    return(array); //importante retornar el array
 }
 
 int main(void)

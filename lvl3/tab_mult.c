@@ -40,6 +40,66 @@ $>*/
 #include <unistd.h>
 #include <stdio.h>
 
+
+//otra manera, sacando la función fuera Y con el main diferente, y mas simple
+void ft_putnbr(int i)
+{
+	int iauxiliar;
+	char numero;
+
+	iauxiliar = i;
+
+	if (i > 9)
+	{
+		iauxiliar = i % 10;
+		i /= 10;
+		ft_putnbr(i);
+	}
+	numero = iauxiliar + '0';
+	write(1, &numero, 1);
+}
+
+int ft_atoi(const char *str)
+{
+	int signo = 1;
+	int resultado = 0;
+
+	while (*str == ' ' || *str == '\t')
+		str++;
+	if (*str == '-')
+		signo = -1;
+	if (*str == '+' || *str == '-')
+		str++;
+	while (*str >= '0' && *str <= '9')
+	{
+		resultado = resultado * 10 + (*str - '0');
+		str++;
+	}
+	return (signo * resultado);
+}
+
+int main(int ac, char **av)
+{
+    int i = 1;
+    if (ac == 1)
+        write(1, "\n", 1);
+    else
+    {
+        while (i < 10)
+        {
+            ft_putnbr(i);
+            write(1, " x ", 3);
+            ft_putnbr(ft_atoi(av[1]));
+            write(1, " = ", 3);
+            ft_putnbr(i * ft_atoi(av[1]));
+            write(1, "\n", 1);
+            i++;
+        }        
+    }
+    return 0;
+}
+
+/*
 int ft_atoi(const char *str)
 {
     int signo;
@@ -60,7 +120,7 @@ int ft_atoi(const char *str)
         str++;
     }
     return (signo * resultado);
-}
+}*/
 /*
 int main()
 {
@@ -70,7 +130,7 @@ int main()
     printf("%d\n", ft_atoi(str));
     return 0;
 }*/
-
+/*
 void ft_putnbr(int i)
 {
     int iauxiliar;
@@ -85,14 +145,14 @@ void ft_putnbr(int i)
     }
     numero = iauxiliar + 48;
     write(1, &numero, 1);
-}
+}*/
 /*
 int main ()
 {
     ft_putnbr(23);
     return 0;
 }*/
-
+/*
 int main(int ac, char **av)
 {
     int i;
@@ -117,4 +177,4 @@ int main(int ac, char **av)
         }
     }
     return (0);
-}
+}*/

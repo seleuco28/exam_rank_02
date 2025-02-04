@@ -44,7 +44,7 @@ void rev_wstr(char *str)
             i--;
         end = i;
         //ATENCION!!!en esta linea de abajo he fallado mucho y por eso no me daba!! IMPORTANTISIMO EL "Y QUE EXISTA"
-        while (str[i] && str[i] != ' ' && str[i] != '\t') //mientras palabra IMPORTANTISIMO EL "Y QUE EXISTA"
+        while (str[i] && (!(str[i] == ' ' || str[i] == '\t'))) //mientras palabra IMPORTANTISIMO EL "Y QUE EXISTA"
             i--;
         start = i + 1; //importante este +1 para estar dentro de la 1ra letra
         int flag;
@@ -54,6 +54,7 @@ void rev_wstr(char *str)
             write(1, &str[start], 1);
             start++;
         }
+		//esto es para pintar todos los espacios menos el último
         if (flag != 0) //si flag no existe porque era igual a start y se ha acabado, al final: start = "-1 + 1 = 0" y no pintaria
             write(1, " ", 1);
     }       

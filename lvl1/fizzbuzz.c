@@ -45,10 +45,10 @@ void ft_putnbr(int i)
 	char numero;
 
 	iauxiliar = i; //cuidado, si lo pongo al reves (i = iauxiliar) me falla!!
-	if (i > 9)
+	if (i > 9) //esto es un if no un while
 	{
-		iauxiliar = i % 10;
-		i = i / 10;
+		iauxiliar = i % 10; //poner esto al reves da fallo
+		i = i / 10;			//poner esto al reves da fallo
 		ft_putnbr(i);
 	}
 	numero = iauxiliar + '0';

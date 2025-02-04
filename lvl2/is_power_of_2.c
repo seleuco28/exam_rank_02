@@ -17,9 +17,7 @@ int	    is_power_of_2(unsigned int n);*/
 
 int is_power_of_2(unsigned int n)
 {
-    int i = 1;
-    //if (n == 1) ESTO NO TIENE QUE PONERSE, DA FAILURE, se considera que 1 es power of 2!!! comprobado
-    //    return (0);
+    int i = 1; //ATENCION, internet me dice que 1 is power of 2, POSIBLE FALLO
     while(i <= n) 
     {
         if (i == n)

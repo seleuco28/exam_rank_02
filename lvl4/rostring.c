@@ -58,7 +58,7 @@ void rostring(char *str)
     {
         if ((str[i - 1] == ' ' || str[i - 1] == '\t') && (!(str[i] == ' ' || str[i] == '\t'))) //si anterior espacio y ahora palabra
         {
-            while (str[i] && (!(str[i] == ' ' || str[i] == '\t'))) //si existe y palabra
+            while (str[i] && (!(str[i] == ' ' || str[i] == '\t'))) //IMPORTANTE ESTE QUE EXISTA!!
             {
                 write(1, &str[i], 1);
                 i++;

@@ -35,6 +35,7 @@ void first_word(char *str)
     while (str[i] == ' ' || str[i] == '\t')
         i++;
     while ((str[i]) && (!(str[i] == ' ' || str[i] == '\t'))) //importante poner (y que exista, si no da fallo en el 3er ejemplo)
+//  while (str[i] && str[i] != ' ' && str[i] != '\t') OTRA FORMA DE ESCRIBIRLO
     {
         write(1, &str[i], 1);
         i++;

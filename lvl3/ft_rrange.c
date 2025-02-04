@@ -34,7 +34,7 @@ int *ft_rrange(int start, int end)
     array = malloc(sizeof(int) * len + 1);
     if (array == NULL)
         return(NULL);
-    while (len >= 0)
+    while (len >= 0) //IMPORTANTE esto, se me ha olvidado
     {
         array[len] = start;
         if (start > end)

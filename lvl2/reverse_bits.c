@@ -47,15 +47,16 @@ _____________
 
 unsigned char reverse_bits(unsigned char octet)
 {
-	unsigned char	r = 0;
-	unsigned		byte_len = 8;
+	// PASA ALGO SI LE QUITO LOS DOS UNSIGNED¿?¿
+	unsigned char	c = 0; //declaro variable y la inicializo a 0
+	unsigned int byte_len = 8; //esta lleva la cuenta de los bits que quedan (es el int i)
 
-	while (byte_len--)
+	while (byte_len--) //bucle de 8
 	{
-		r = (r << 1) | (octet & 1);
-		octet >>= 1;
+		c = (c << 1) | (octet & 1); //pilla el valor y lo desplaza  a la izda
+		octet >>= 1; //te mueves al siguiente valor de octet (se va /2)
 	}
-	return (r);
+	return (c);
 }
 
 /*

@@ -48,7 +48,7 @@ void expand_str(char *str)
             }
             write(1, &str[i], 1);
         }
-        
+        //CUIDADO CON NO PONER EL WRITE AQUI ABAJO!! write(1, &str[i], 1);
         i++;
     }
 }

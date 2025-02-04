@@ -17,10 +17,9 @@ Example, if you pass 2 to print_bits, it will print "00000010"*/
 
 void print_bits(unsigned char octet)
 {
-	int	i = 256; // 255 es el numero en el que se llena todo de 1s
-    while (i >>= 1) //bitwise operator, entocnes, se va shifteando uno por uno (como consecuencia se va dividiendo entre 2)
+	int	i = 256; // 256 te llena los 8 primeros 0s
+    while (i >>= 1) //con i = 256, se va /2 8 veces, al desplazarlo una vez a la derecha se divide entre 2
 	{
-        //si cambio los parametros de este if de orden pasaria algo¿?¿¿
         if (octet & i) //MIRARLO EN PYTONTUTOR pero, si coincide el 1er uno de i con n, pintamos 1 y sino pintamos 0
             write(1, "1", 1);
         else
@@ -32,7 +31,7 @@ void print_bits(unsigned char octet)
 int main()
 {
     int n = 42;
-    print_bits(n);
+    print_bits(n); //ATENCION: es unsigned char, pero hay que meterle un int!
     printf("\n");
 }
 

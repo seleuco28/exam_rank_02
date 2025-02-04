@@ -20,10 +20,11 @@ char *ft_strrev(char *str)
 {
 	int i = 0;
 	int len = 0;
-	char temp;
+	char temp; //char¿?¿? yo le pongo int -> checkear
 	while (str[len])
 		len++;
 	len--; //siempre nos vamos uno en len;
+	//aqui se puede meter un igual o no¿¿? DA IGUAL
 	while (i < len) //posible fallo, aqui antes he puesto "while (str[i])" y no me lo hacia CUIDADO
 	{
 		temp = str[i];
@@ -37,7 +38,7 @@ char *ft_strrev(char *str)
 
 int main()
 {
-	char string[7] = "123456";
+	char string[7] = "123456"; //CUIDADO: si meto el string directamente en el printf me salta "bus error" 
 
 	//printf("%s\n", string);
 	//ft_strrev(string);

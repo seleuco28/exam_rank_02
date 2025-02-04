@@ -28,7 +28,7 @@ void camel_to_snake(char *str)
 	int i = 0;
 	while (str[i])
 	{
-		if (str[i] >= 'A' && str[i] <= 'Z')
+		if (str[i] >= 'A' && str[i] <= 'Z') // && (i != 0) CHECKEAR ESTO POR: except for the first one
 		{
 			write(1, "_", 1);
 			str[i] = str[i] + 32;
@@ -45,27 +45,3 @@ int main(int ac, char **av)
 	write(1, "\n", 1);
 	return 0;
 }
-
-
-/*
-void (camel_to_snake(char *str))
-{
-    while (*str)
-    {
-        if (*str >= 'A' && *str <= 'Z')
-        {
-            write(1, "_", 1);
-            *str = *str + (32);
-        }
-        write(1, str, 1);
-        str++;
-    }
-}
-
-int main(int ac, char **av)
-{
-    if (ac == 2)
-        camel_to_snake(av[1]);
-    write(1, "\n", 1);
-    return 0;
-}*/
