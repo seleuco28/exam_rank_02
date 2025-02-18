@@ -1,63 +1,94 @@
-/*Assignment name  : fprime
-Expected files   : fprime.c
-Allowed functions: printf, atoi
+/*Assignment name  : ft_split
+Expected files   : ft_split.c
+Allowed functions: malloc
 --------------------------------------------------------------------------------
 
-Write a program that takes a positive int and displays its prime factors on the
-standard output, followed by a newline.
+Write a function that takes a string, splits it into words, and returns them as
+a NULL-terminated array of strings.
 
-Factors must be displayed in ascending order and separated by '*', so that
-the expression in the output gives the right result.
+A "word" is defined as a part of a string delimited either by spaces/tabs/new
+lines, or by the start/end of the string.
 
-If the number of parameters is not 1, simply display a newline.
+Your function must be declared as follows:
 
-The input, when there's one, will be valid.
+char    **ft_split(char *str);*/
 
-Examples:
-
-$> ./fprime 225225 | cat -e
-3*3*5*5*7*11*13$
-$> ./fprime 8333325 | cat -e
-3*3*5*5*7*11*13*37$
-$> ./fprime 9539 | cat -e
-9539$
-$> ./fprime 804577 | cat -e
-804577$
-$> ./fprime 42 | cat -e
-2*3*7$
-$> ./fprime 1 | cat -e
-1$
-$> ./fprime | cat -e
-$
-$> ./fprime 42 21 | cat -e
-$*/
-
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-void fprime(int n)
+int count_words(char *str)
 {
-	int i = 2;
-	if (n == 1)
-		printf("1");
-	while (i <= n)
-	{
-		if (n % i == 0)
-		{
-			printf("%d", i);
-			if (n != i)
-				printf("*");
-			n /= i;
-			i--;
-		}
+	int i = 0;
+	int num_words = 0;
+	while (str[i] == ' ' || str[i] == '\t')
 		i++;
+	while (str[i])
+	{
+		num_words++;
+		while (!(str[i] == ' ' || str[i] == '\t'))
+			i++;
+		while (str[i] == ' ' || str[i] == '\t')
+			i++;
+	}
+	return(num_words);
+}
+
+char	*word_strdup(char *str) // le hago malloc a la palabra y copio el string original (strdup)
+{
+	int i = 0;
+	int len = 0;//ft_wordlen(str);
+	while (str[len] && (!(str[len] == ' ' || str[len] == '\t'))) //mientras exista y palabra
+		len++;
+	char *word = malloc(sizeof(char) * (len + 1));
+
+	while (str[i])
+	{
+		word[i] = str[i];
+		i++;
+	}
+	word[len] = '\0';
+	return (word);
+}
+
+void fill_words(char **array, char *str)
+{
+	int num_cajon = 0;
+	int i = 0;
+
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
+	while (str[i])
+	{
+		array[num_cajon] = word_strdup(&str[i]);
+		num_cajon++;
+		while (str[i] && (!(str[i] == ' ' || str[i] == '\t')))
+			i++;
+		while (str[i] == ' ' || str[i] == '\t')
+			i++;
 	}
 }
 
-int main(int ac, char **av)
+char    **ft_split(char *str)
 {
-	if (ac == 2)
-		fprime(atoi(av[1]));
-	printf("\n");
+	int num_words = count_words(str);
+	char **array;
+
+	array = malloc(sizeof(char *) * (num_words + 1));
+	array[num_words] = 0;
+	fill_words(array, str);
+	return(array);
+}
+
+int main()
+{
+	int i = 0;
+	char **tab;
+	tab = ft_split("   hola   mundo   adios   agur   ");
+	while (i < 4)
+	{
+		printf("%s\n", tab[i]);
+		i++;
+	}
 	return 0;
 }

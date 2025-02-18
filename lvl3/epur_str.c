@@ -31,7 +31,7 @@ void epur_str(char *str)
 {
     int i = 0;
     int flag = 0;
-    while (str[i] == ' ' || str[i] == '\t') //este || a veces lo pongo como && y da error!!
+    while (str[i] == ' ' || str[i] == '\t')
         i++;
 
     while (str[i])

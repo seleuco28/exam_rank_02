@@ -19,37 +19,39 @@ char    **ft_split(char *str);*/
 int		count_words(char *str) //me retorna el numero de palabras que tiene el string
 {
 	int num_words = 0;
-	
-	while (*str == ' ' || *str == '\t' || *str == '\n') //salto los espacios
-		str++;
-	while (*str != '\0')
+	int i = 0;
+	while (str[i] == ' ' || str[i] == '\t') //salto los espacios
+		i++;
+	while (str[i])
 	{
 		num_words++; //cuento palabra
-		while (*str != '\0' && *str != ' ' && *str != '\t' && *str != '\n') //salto espacios
-			str++;
-		while (*str == ' ' || *str == '\t' || *str == '\n') //salto palabra
-			str++;
+		while (str[i] && (!(str[i] == ' ' || str[i] == '\t'))) //salto palabra IMPORANTE PONER EL "Y QUE EXISTA"
+			i++;
+		while (str[i] == ' ' || str[i] == '\t') //salto espacios
+			i++;
 	}
 	return (num_words);
 }
 
-int	ft_wordlen(char *str) //mido la len de una palabra
+/*int	ft_wordlen(char *str) //mido la len de una palabra
 {
 	int i = 0;
 
 	while (str[i] != '\0' && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
 		i++;
 	return (i);
-}
+}*/
 
+// CUIDADO, ESTA FUNCION NO ES EXACTAMENTE IGUAL A UN FT_STRDUP
 char	*word_strdup(char *str) // le hago malloc a la palabra y copio el string original (strdup)
 {
 	int i = 0;
-	int len = ft_wordlen(str);
+	int len = 0;//ft_wordlen(str);
+	while (str[len] && (!(str[len] == ' ' || str[len] == '\t'))) //mientras exista y palabra
+		len++;
 	char *word = malloc(sizeof(char) * (len + 1));
-	
-	
-	while (i < len)
+
+	while (str[i])
 	{
 		word[i] = str[i];
 		i++;
@@ -60,18 +62,20 @@ char	*word_strdup(char *str) // le hago malloc a la palabra y copio el string or
 
 void	fill_words(char **array, char *str) //meto en un 'cajon' la palabra, y me la salto
 {
-	int word_index = 0;
-	
-	while (*str == ' ' || *str == '\t' || *str == '\n') //me salto los primeros espacios
-		str++;
-	while (*str != '\0')
+	int num_cajon = 0;
+	int i = 0;
+
+	while (str[i] == ' ' || str[i] == '\t') //me salto los primeros espacios
+		i++;
+	while (str[i])
 	{
-		array[word_index] = word_strdup(str); //meto la copia de la palabra, en el **array
-		word_index++;
-		while (*str != '\0' && *str != ' ' && *str != '\t' && *str != '\n') //me salto la palabra
-			str++;
-		while (*str == ' ' || *str == '\t' || *str == '\n') //me salto los espacios
-			str++;
+		// IMPORTANTE ESTE ----------  &str[i] -> si no da segfault
+		array[num_cajon] = word_strdup(&str[i]); //meto la copia de la palabra, en el **array
+		num_cajon++;
+		while (str[i] && (!(str[i] == ' ' || str[i] == '\t'))) //salto palabra IMPORANTE PONER EL "Y QUE EXISTA"
+			i++;
+		while (str[i] == ' ' || str[i] == '\t') //salto espacios
+			i++;
 	}
 }
 
@@ -82,8 +86,8 @@ char	**ft_split(char *str)
 	
 	num_words = count_words(str);
 	array = malloc(sizeof(char *) * (num_words + 1)); //ATENCION AQUI, QUE ES MALLOC A CHAR*
-	
-	array[num_words] = 0; //asi paro el array
+	                                                  //array siempre de num_words + 1 para que el ultimo sea el NULL
+	array[num_words] = 0; //asi paro el array (una especie de /0)
 	fill_words(array, str); //llena las palabras de cada cajon del array
 	return (array); //retorna puntero al array
 }

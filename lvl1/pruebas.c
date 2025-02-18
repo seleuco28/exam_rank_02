@@ -1,53 +1,60 @@
-/*Assignment name  : search_and_replace
-Expected files   : search_and_replace.c
-Allowed functions: write, exit
+/*Assignment name  : repeat_alpha
+Expected files   : repeat_alpha.c
+Allowed functions: write
 --------------------------------------------------------------------------------
 
-Write a program called search_and_replace that takes 3 arguments, the first 
-arguments is a string in which to replace a letter (2nd argument) by
-another one (3rd argument).
+Write a program called repeat_alpha that takes a string and display it
+repeating each alphabetical character as many times as its alphabetical index,
+followed by a newline.
 
-If the number of arguments is not 3, just display a newline.
+'a' becomes 'a', 'b' becomes 'bb', 'e' becomes 'eeeee', etc...
 
-If the second argument is not contained in the first one (the string)
-then the program simply rewrites the string followed by a newline.
+Case remains unchanged.
+
+If the number of arguments is not 1, just display a newline.
 
 Examples:
-$>./search_and_replace "Papache est un sabre" "a" "o"
-Popoche est un sobre
-$>./search_and_replace "zaz" "art" "zul" | cat -e
+
+$>./repeat_alpha "abc"
+abbccc
+$>./repeat_alpha "Alex." | cat -e
+Alllllllllllleeeeexxxxxxxxxxxxxxxxxxxxxxxx.$
+$>./repeat_alpha 'abacadaba 42!' | cat -e
+abbacccaddddabba 42!$
+$>./repeat_alpha | cat -e
 $
-$>./search_and_replace "zaz" "r" "u" | cat -e
-zaz$
-$>./search_and_replace "jacob" "a" "b" "c" "e" | cat -e
+$>
+$>./repeat_alpha "" | cat -e
 $
-$>./search_and_replace "ZoZ eT Dovid oiME le METol." "o" "a" | cat -e
-ZaZ eT David aiME le METal.$
-$>./search_and_replace "wNcOre Un ExEmPle Pas Facilw a Ecrirw " "w" "e" | cat -e
-eNcOre Un ExEmPle Pas Facile a Ecrire $*/
+$>*/
 
 #include <unistd.h>
 
-void search_and_replace(char *str, char *se, char *re)
+void repeat_alpha(char *str)
 {
     int i = 0;
-    if (!(se[1] || re[1]))
+    int contador;
+    while (str[i])
     {
-        while (str[i])
+        if (str[i] >= 'a' && str[i] <= 'z')
+            contador = str[i] - 'a' + 1;
+        else if (str[i] >= 'A' && str[i] <= 'Z')
+            contador = str[i] - 'A' + 1;
+        else
+            contador = 1;
+        while (contador >= 1)        
         {
-            if (str[i] == se[0])
-                str[i] = re[0];
             write(1, &str[i], 1);
-            i++;
+            contador --;
         }
+        i++;
     }
 }
 
-
 int main(int ac, char **av)
 {
-    if (ac == 4)
-        search_and_replace(av[1], av[2], av[3]);
+    if (ac == 2)
+        repeat_alpha(av[1]);
     write(1, "\n", 1);
     return 0;
 }
