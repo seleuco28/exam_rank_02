@@ -22,7 +22,7 @@ void sort_int_tab(int *tab, unsigned int size)
 	int i = 0;
 	int temp;
 
-	while (i < (size - 1)) // IMPORTANTE METER EL SIZE -1, si no peta
+	while (i < (size)) 
 	{
 		if (tab[i] > tab[i + 1]) //haces el swap Y VUELVES A EMPEZAR, IMPORTANTE
 		{

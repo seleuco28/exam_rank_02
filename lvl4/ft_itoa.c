@@ -29,12 +29,13 @@ int get_count(int n) //para ver cuantas celdas de memoria allocar
 char *ft_itoa(int nbr)
 {
 	char *str;
-	int count = get_count(nbr);
+	int count = get_count(nbr); //-123 = 4
 
-	str = malloc(sizeof(char) * count); //no necesitaria el +1
+	str = malloc(sizeof(char) * count); //no necesitaria el +1?? CREO QUE NO
 	if (!str)
 		return (NULL);
 	str[count--] = '\0'; //pongo fin al string // ATENCION, SI NO CORRO UNO ATRAS EL COUNT, EL PROGRAMA SE QUEDA PILLADO
+	//count--; ->puesto arriba para quitar una linea de codigo
 	if (nbr == 0) //controlo la excepcion del 0
 		str[0] = '0'; //y si pongo str[count]¿?¿?
 	else

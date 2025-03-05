@@ -1,94 +1,68 @@
-/*Assignment name  : ft_split
-Expected files   : ft_split.c
-Allowed functions: malloc
+/*Assignment name  : rev_wstr
+Expected files   : rev_wstr.c
+Allowed functions: write, malloc, free
 --------------------------------------------------------------------------------
 
-Write a function that takes a string, splits it into words, and returns them as
-a NULL-terminated array of strings.
+Write a program that takes a string as a parameter, and prints its words in 
+reverse order.
 
-A "word" is defined as a part of a string delimited either by spaces/tabs/new
-lines, or by the start/end of the string.
+A "word" is a part of the string bounded by spaces and/or tabs, or the 
+begin/end of the string.
 
-Your function must be declared as follows:
+If the number of parameters is different from 1, the program will display 
+'\n'.
 
-char    **ft_split(char *str);*/
+In the parameters that are going to be tested, there won't be any "additional" 
+spaces (meaning that there won't be additionnal spaces at the beginning or at 
+the end of the string, and words will always  be separated by exactly one space).
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+Examples:
 
-int count_words(char *str)
+$> ./rev_wstr "le temps du mepris precede celui de l'indifference" | cat -e
+l'indifference de celui precede mepris du temps le$
+$> ./rev_wstr "abcdefghijklm"
+abcdefghijklm
+$> ./rev_wstr "il contempla le mont" | cat -e
+mont le contempla il$
+$> ./rev_wstr | cat -e
+$
+$>*/
+
+#include <unistd.h>
+
+void rev_wstr(char *str)
 {
 	int i = 0;
-	int num_words = 0;
-	while (str[i] == ' ' || str[i] == '\t')
-		i++;
-	while (str[i])
-	{
-		num_words++;
-		while (!(str[i] == ' ' || str[i] == '\t'))
-			i++;
-		while (str[i] == ' ' || str[i] == '\t')
-			i++;
-	}
-	return(num_words);
-}
-
-char	*word_strdup(char *str) // le hago malloc a la palabra y copio el string original (strdup)
-{
-	int i = 0;
-	int len = 0;//ft_wordlen(str);
-	while (str[len] && (!(str[len] == ' ' || str[len] == '\t'))) //mientras exista y palabra
-		len++;
-	char *word = malloc(sizeof(char) * (len + 1));
+	int start;
+	int end;
+	int flag;
 
 	while (str[i])
-	{
-		word[i] = str[i];
 		i++;
-	}
-	word[len] = '\0';
-	return (word);
-}
-
-void fill_words(char **array, char *str)
-{
-	int num_cajon = 0;
-	int i = 0;
-
-	while (str[i] == ' ' || str[i] == '\t')
-		i++;
-	while (str[i])
+	i--;
+	while (i >= 0)
 	{
-		array[num_cajon] = word_strdup(&str[i]);
-		num_cajon++;
+		if (str[i] == ' ' || str[i] == '\t') //si espacio salta
+			i--;
+		end = i;
 		while (str[i] && (!(str[i] == ' ' || str[i] == '\t')))
-			i++;
-		while (str[i] == ' ' || str[i] == '\t')
-			i++;
+			i--;
+		start = i + 1;
+		flag = start;
+		while (start <= end)
+		{
+			write(1, &str[start], 1);
+			start++;
+		}
+		if (flag != 0)
+			write(1, " ", 1);
 	}
 }
 
-char    **ft_split(char *str)
+int main(int ac, char **av)
 {
-	int num_words = count_words(str);
-	char **array;
-
-	array = malloc(sizeof(char *) * (num_words + 1));
-	array[num_words] = 0;
-	fill_words(array, str);
-	return(array);
-}
-
-int main()
-{
-	int i = 0;
-	char **tab;
-	tab = ft_split("   hola   mundo   adios   agur   ");
-	while (i < 4)
-	{
-		printf("%s\n", tab[i]);
-		i++;
-	}
+	if (ac == 2)
+		rev_wstr(av[1]);
+	write(1, "\n", 1);
 	return 0;
 }

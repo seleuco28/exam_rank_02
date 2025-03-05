@@ -15,7 +15,7 @@ If the array is empty, the function returns 0.
 int max(int* tab, unsigned int len)
 {
     int i = 0;
-    int maximo = tab[i];
+    int maximo = tab[i]; //He fallado aqui
 
     if (len == 0) //ATENCION: poner esto, sin ello en main con len = 0 da un numero Y PARA CUMPLIR "If the array is empty, the function returns 0."
         return 0;
@@ -32,7 +32,7 @@ int max(int* tab, unsigned int len)
 
 int main()
 {
-    int i[6] = {-1000, 2, 403, 24, 345, 23};
+    int array[6] = {-1000, 2, 403, 24, 345, 23};
 
-    printf("%d\n", max(i , 6));
+    printf("%d\n", max(array , 6));
 }

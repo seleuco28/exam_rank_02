@@ -36,18 +36,18 @@ void rev_wstr(char *str)
     int i = 0;
     int start;
     int end;
+	int flag;
     while (str[i])
         i++;
-    while (i >= 0) //aqui no se puede poner while (str[i]) porque ya no existe claro!!
+	i--;
+    while (i >= 0) //ATENCION WHILE DIFERENTE
     {
-        while (str[i] == ' ' || str[i] == '\t' || str[i] == '\0') //importante este '\0' porque en el primer supuesto siempre sera asi
+        if (str[i] == ' ' || str[i] == '\t') //si espacio salta
             i--;
         end = i;
-        //ATENCION!!!en esta linea de abajo he fallado mucho y por eso no me daba!! IMPORTANTISIMO EL "Y QUE EXISTA"
         while (str[i] && (!(str[i] == ' ' || str[i] == '\t'))) //mientras palabra IMPORTANTISIMO EL "Y QUE EXISTA"
             i--;
         start = i + 1; //importante este +1 para estar dentro de la 1ra letra
-        int flag;
         flag = start;
         while (start <= end)
         {
@@ -55,7 +55,7 @@ void rev_wstr(char *str)
             start++;
         }
 		//esto es para pintar todos los espacios menos el último
-        if (flag != 0) //si flag no existe porque era igual a start y se ha acabado, al final: start = "-1 + 1 = 0" y no pintaria
+        if (flag != 0) //en el ultimo caso start = -1 (estará fuera del string) por lo que flag = 0
             write(1, " ", 1);
     }       
 }

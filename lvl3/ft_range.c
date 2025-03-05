@@ -25,7 +25,7 @@ Examples:
 int     *ft_range(int start, int end)
 {
     int len;
-    int *array;
+    int *array; //fallo aqui casi siempre -> a la hora de poner los arrays
     if (start < end)
         len = end - start;
     else

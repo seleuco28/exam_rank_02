@@ -32,7 +32,7 @@ void pgcd(int y, int z) //cambiado entero porque dejan atoi y printf, mas sencil
 	int i = 1;
 	int temp;
 
-	while (i <= y && i <= z)
+	while (i <= y && i <= z) //tener en cuenta que el 1 siempre se va a cumplplir, y luego ir checkeando el resto de numeros inferiores
 	{
 		if ((y % i == 0) && (z % i == 0))
 			temp = i;

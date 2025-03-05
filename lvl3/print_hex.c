@@ -22,19 +22,21 @@ $*/
 #include <stdio.h>
 #include <unistd.h>
 
-int atoi_simple(char *str)
+int ft_atoi(const char *str)
 {
-	int resultado = 0; // importante no inicializarlo como char
-	int signo = 1;
-	while (*str == '-' || *str == '\t')
+	int signo;
+	int resultado;
+	signo = 1;
+	resultado = 0;
+	while (*str == ' ' || *str == '\t')
 		str++;
 	if (*str == '-')
 		signo = -1;
-	while (*str == '-' || *str == '+')
+	if (*str == '+' || *str == '-')
 		str++;
 	while (*str >= '0' && *str <= '9')
 	{
-		resultado = resultado * 10 + *str - '0';
+		resultado = resultado * 10 + (*str - '0');
 		str++;
 	}
 	return (signo * resultado);
@@ -62,7 +64,7 @@ void print_hex(int i) //FALLO-CUIDADO, al meter el atoi, de parámetro meto int 
 int main(int ac, char **av)
 {
 	if (ac == 2)
-		print_hex(atoi_simple(av[1]));
+		print_hex(ft_atoi(av[1]));
 	write(1, "\n", 1);
 	return(0);
 }

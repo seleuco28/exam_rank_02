@@ -36,10 +36,10 @@ void expand_str(char *str)
         i++;
     while (str[i])
     {
-        if (str[i] == ' ' || str[i] == '\t')
+        if (str[i] == ' ' || str[i] == '\t') //si espacio
             flag = 1;
 		//if (str[i] != ' ' || str[i] != '\t') //asi es como lo haria yo, y me da fallo, es correcta la de abajo, ni idea de por qué	
-        if (!(str[i] == ' ' || str[i] == '\t')) //asi SI FUNCIONA
+        if (!(str[i] == ' ' || str[i] == '\t')) //si palabra
         {
             if (flag == 1)
             {

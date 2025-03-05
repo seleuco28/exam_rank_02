@@ -31,7 +31,7 @@ eNcOre Un ExEmPle Pas Facile a Ecrire $*/
 void search_and_replace(char *str, char *se, char *re)
 {
     int i = 0;
-    if (!se[1] || !re[1]) // (no poner "&" es "||") && (si existe mas de una letra en los argumentos, fail)
+    if ((!se[1]) && (!re[1])) // CUIDADO, ES && no || (creo, el simulador da las dos bien)
     {
         while (str[i])
         {

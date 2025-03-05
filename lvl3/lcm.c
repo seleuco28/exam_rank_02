@@ -38,7 +38,7 @@ unsigned int lcm(unsigned int a, unsigned int b)
         i = a;
     else
         i = b;
-    while(1)
+    while(1) //importante esto
     {
         if (i % a == 0 && i % b == 0)
             return (i);

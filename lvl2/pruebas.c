@@ -1,60 +1,38 @@
-/*
-Assignment name  : wdmatch
-Expected files   : wdmatch.c
-Allowed functions: write
+/*Assignment name  : ft_strdup
+Expected files   : ft_strdup.c
+Allowed functions: malloc
 --------------------------------------------------------------------------------
 
-Write a program that takes two strings and checks whether it's possible to
-write the first string with characters from the second string, while respecting
-the order in which these characters appear in the second string.
+Reproduce the behavior of the function strdup (man strdup).
 
-If it's possible, the program displays the string, followed by a \n, otherwise
-it simply displays a \n.
+Your function must be declared as follows:
 
-If the number of arguments is not 2, the program displays a \n.
+char    *ft_strdup(char *src);*/
 
-Examples:
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
-$>./wdmatch "faya" "fgvvfdxcacpolhyghbreda" | cat -e
-faya$
-$>./wdmatch "faya" "fgvvfdxcacpolhyghbred" | cat -e
-$
-$>./wdmatch "quarante deux" "qfqfsudf arzgsayns tsregfdgs sjytdekuoixq " | cat -e
-quarante deux$
-$>./wdmatch "error" rrerrrfiiljdfxjyuifrrvcoojh | cat -e
-$
-$>./wdmatch | cat -e
-$*/
-
-#include <unistd.h>
-
-void wdmatch(char *str1, char *str2)
+char *ft_strdup(char *src)
 {
     int i = 0;
-    int j = 0;
-
-    while (str2[j])
+    char *str;
+    while (src[i])
+        i++;
+    str = malloc(sizeof(char) * i + 1);
+    i = 0;
+    while (src[i])
     {
-        if (str2[j] == str1[i])
-            i++;
-        j++;
+        str[i] = src[i];
+        i++;
     }
-
-    if (!str1[i]) //si no existe
-    {
-        i = 0;
-        while (str1[i])
-        {
-            write(1, &str1[i], 1);
-            i++;
-        }
-    }
+    str[i] = '\0';
+    return(str);
 }
 
-int main(int ac, char **av)
+int main()
 {
-    if (ac == 3)
-        wdmatch(av[1], av[2]);
-    write(1, "\n", 1);
-    return 0;
+    printf("%s\n", strdup("abc123"));
+    printf("%s\n", ft_strdup("abc123"));
+    return (0);
 }
